@@ -100,22 +100,17 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link nav-toggle"> <i data-feather="coffee"></i>
-                                    <span class="title">Leave</span> <span class="arrow"></span>
+                                    <span class="title">Restaurant</span> <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item">
-                                        <a href="/staffs_on_leave" class="nav-link "> <span
-                                                class="title">Staffs On Leave</span>
+                                        <a href="/food" class="nav-link "> <span
+                                                class="title">Food</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/leave_request" class="nav-link "> <span
-                                                class="title">Request Leave</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="/add_leave_type" class="nav-link "> <span
-                                                class="title">Add Leave Type</span>
+                                        <a href="/drinks" class="nav-link "> <span
+                                                class="title">Drinks</span>
                                         </a>
                                     </li>
                                 </ul>

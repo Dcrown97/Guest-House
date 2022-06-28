@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
-class UserContoller extends Controller
+class UserController extends Controller
 {
     public function SignUp(Request $request)
     {
