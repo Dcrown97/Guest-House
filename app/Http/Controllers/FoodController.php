@@ -88,6 +88,14 @@ class FoodController extends Controller
     }
 
 
+    public function foodReport () {
+
+        $foodReports = FoodOrder::all();
+
+        return view('foodReport', compact('foodReports'));
+    }
+
+
     public function getFoodPrice(Request $request)
     {
         // dd($request->food_id);
@@ -154,6 +162,7 @@ class FoodController extends Controller
             'drink_id' => 'required',
             'ordered_drink_price' => 'required',
             'ordered_drink_quantity' => 'required',
+            'ordered_total_price' => 'required',
         ]);
 
         $OrderedDrinks = new OrderDrink();
@@ -165,11 +174,13 @@ class FoodController extends Controller
                 'drink_id' => 'required',
                 'ordered_drink_price' => 'required',
                 'ordered_drink_quantity' => 'required',
+                'ordered_total_price' => 'required',
             ]);
 
             $OrderedDrinks->drink_id = $request->drink_id;
             $OrderedDrinks->ordered_drink_price = $request->ordered_drink_price;
             $OrderedDrinks->ordered_drink_quantity = $request->ordered_drink_quantity;
+            $OrderedDrinks->ordered_total_price = $request->ordered_total_price;
             $saved = $OrderedDrinks->save();
             if ($saved) {
                 return redirect('/drinks')->with('success', 'Drink Ordered Successfully');
@@ -179,6 +190,11 @@ class FoodController extends Controller
         }
 
         return view('drinks');
+    }
+
+    public function drinksReport () {
+
+        return view('drinksReport');
     }
 
     public function getDrinkPrice(Request $request)

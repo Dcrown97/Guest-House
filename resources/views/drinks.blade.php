@@ -149,6 +149,16 @@
                                                                 class="form-control input-height" />
                                                         </div>
                                                     </div>
+                                                    <div class="form-group row">
+                                                        <label class="control-label col-md-3">Total Price
+                                                            <span class="required"> * </span>
+                                                        </label>
+                                                        <div class="col-md-5">
+                                                            <input readonly type="number" name="ordered_total_price"
+                                                                data-required="1" id="ordered_total_price" placeholder=""
+                                                                class="form-control input-height" />
+                                                        </div>
+                                                    </div>
                                                     <div class="form-actions">
                                                         <div class="row">
                                                             <div class="offset-md-3 col-md-9">
@@ -207,6 +217,13 @@
                     console.log(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
+        });
+
+        $('#ordered_drink_quantity').keyup(function() {
+            console.log("fsdfsdyu")
+            let total_price = $(this).val() * $('#drink_price').val();
+            $('#ordered_total_price').val(total_price);
+            // console.log(total_price)
         });
     });
 </script>
