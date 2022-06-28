@@ -5,7 +5,7 @@
             <div class="page-bar">
                 <div class="page-title-breadcrumb">
                     <div class=" pull-left">
-                        <div class="page-title">Add Staffs</div>
+                        <div class="page-title">Rooms</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i
@@ -13,7 +13,7 @@
                         </li>
                         <li><a class="parent-item" href="/all_staffs">Staffs</a>&nbsp;<i class="fa fa-angle-right"></i>
                         </li>
-                        <li class="active">Add Staffs</li>
+                        <li class="active">Add Rooms</li>
                     </ol>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="card card-box">
                         <div class="card-head">
-                            <header>Basic Information</header>
+                            <header>Room Information</header>
                             <button id="panel-button" class="mdl-button mdl-js-button mdl-button--icon pull-right"
                                 data-upgraded=",MaterialButton">
                                 <i class="material-icons">more_vert</i>
@@ -38,62 +38,47 @@
                         </div>
                         <div class="card-body" id="bar-parent">
                             @include('flash.flash')
-                            <form action="{{ route('add_staffs') }}" method="POST" id="form_sample_1"
+                            <form action="/edit_room/{{$room->id}}" method="POST" id="form_sample_1"
                                 class="form-horizontal">
                                 @csrf
                                 <div class="form-body">
                                     <div class="form-group row">
-                                        <label class="control-label col-md-3">First Name
+                                        <label class="control-label col-md-3">Rooms
                                             <span class="required"> * </span>
                                         </label>
                                         <div class="col-md-5">
-                                            <input type="text" name="first_name" data-required="1"
-                                                placeholder="Enter first name" class="form-control input-height" />
+                                            <input type="text" name="name" value="{{ $room->name }}" data-required="1"
+                                                placeholder="Enter room name" class="form-control input-height" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label col-md-3">Last Name
+                                        <label class="control-label col-md-3">Price
                                             <span class="required"> * </span>
                                         </label>
                                         <div class="col-md-5">
-                                            <input type="text" name="last_name" data-required="1"
-                                                placeholder="Enter last name" class="form-control input-height" />
+                                            <input type="text" name="price" value="{{ $room->price }}" data-required="1"
+                                                placeholder="5000" class="form-control input-height" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label col-md-3">Rank
+                                        <label class="control-label col-md-3">Status
                                             <span class="required"> * </span>
                                         </label>
                                         <div class="col-md-5">
-                                            <input type="text" name="rank" data-required="1" placeholder="Enter rank"
-                                                class="form-control input-height" />
+                                            <input type="text" readonly name="status" value="{{ $room->status }}" data-required="1"
+                                                placeholder="5000" class="form-control input-height" />
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="control-label col-md-3">Unit
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-5">
-                                            <input type="text" name="unit" data-required="1" placeholder="Enter unit"
-                                                class="form-control input-height" />
-                                        </div>
+
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="control-label col-md-3">Leave Days
-                                            <span class="required"> * </span>
-                                        </label>
-                                        <div class="col-md-5">
-                                            <input type="number" name="leave_days" data-required="1" placeholder="Enter Leave Days"
-                                                class="form-control input-height" />
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-actions">
                                         <div class="row">
                                             <div class="offset-md-3 col-md-9">
                                                 <button type="submit"
-                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Submit</button>
-                                                <button type="button"
-                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</button>
+                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Edit</button>
+                                                <a href="/rooms" class="btn btn-danger btn-circle"
+                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</a>
                                             </div>
                                         </div>
                                     </div>
