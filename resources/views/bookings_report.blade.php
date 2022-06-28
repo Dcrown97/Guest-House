@@ -5,7 +5,7 @@
             <div class="page-bar">
                 <div class="page-title-breadcrumb">
                     <div class=" pull-left">
-                        <div class="page-title">All Staffs</div>
+                        <div class="page-title">Rooms</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i
@@ -13,7 +13,7 @@
                         </li>
                         {{-- <li><a class="parent-item" href="#">Other Staff</a>&nbsp;<i class="fa fa-angle-right"></i> --}}
                         </li>
-                        <li class="active">All Staff</li>
+                        <li class="active">Rooms</li>
                     </ol>
                 </div>
             </div>
@@ -41,15 +41,16 @@
                                                 </div>
                                             </div>
                                             <div class="card-body ">
+                                                 @include('flash.flash')    
                                                 <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-6">
+                                                    {{-- <div class="col-md-6 col-sm-6 col-6">
                                                         <div class="btn-group">
-                                                            <a href="/add_staffs" id="addRow" class="btn btn-primary">
-                                                                Add New Staff <i class="fa fa-plus"></i>
+                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
+                                                                Add More Rooms <i class="fa fa-plus"></i>
                                                             </a>
                                                         </div>
 
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6 col-sm-6 col-6">
                                                         <div id="example4_filter" class="dataTables_filter">
                                                             <label>
@@ -68,32 +69,36 @@
                                                         <tr>
                                                             <th>S/N</th>
                                                             <th> Name </th>
-                                                            <th> Rank </th>
-                                                            <th> Unit </th>
+                                                            <th> Amount </th>
+                                                            <th> Check In</th>
+                                                            <th> Check Out </th>
+                                                            <th> Day(s)</th>
                                                             {{-- <th> Leave Days </th> --}}
-                                                            <th> Action </th>
+                                                            <th> Date </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="result"></tbody>
                                                     <tbody id="old">
-                                                        @if (isset($Staffs) && count($Staffs) > 0)
-                                                            @foreach ($Staffs as $staff)
+                                                        @if (isset($bookings) && count($bookings) > 0)
+                                                            @foreach ($bookings as $booking)
                                                                 <tr class="odd gradeX">
                                                                     <td class="patient-img">
                                                                         {{ $loop->iteration }}
                                                                     </td>
-                                                                    <td>{{ $staff->first_name }} {{ $staff->last_name }}
+                                                                    <td>{{ $booking->room->name }}
                                                                     </td>
-                                                                    <td class="center">{{ $staff->rank }}</td>
-                                                                    <td>{{ $staff->unit }}</td>
-                                                                    {{-- <td>{{ $staff->leave_days == 30 ? 30 : 30 - intval($staff->leave_days) }} --}}
+                                                                    <td class="center">{{ $booking->amount }}</td>
+                                                                    <td>{{ 
+                                                                        date('d-m-Y', strtotime($booking->check_in))
+                                                                     }}</td>
+                                                                    <td>{{ 
+                                                                        date('d-m-Y', strtotime($booking->check_out))
+                                                                     
+                                                                     }}</td>
+                                                                    <td>{{ date($booking->days) }}</td>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="profile-userbuttons">
-                                                                            <a href="/leave_request/{{ base64_encode($staff->id) }}"
-                                                                                class="btn btn-circle deepPink-bgcolor btn-sm">Request
-                                                                                Leave</a>
-                                                                        </div>
+                                                                        {{ $booking->created_at->diffForHumans() }}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -101,7 +106,7 @@
                                                             @endif
                                                         </tbody>
                                                     </table>
-                                                    {{ $Staffs->links('vendor.pagination.bootstrap-4') }}
+                                                    {{-- {{ $bookings->links('vendor.pagination.bootstrap-4') }} --}}
                                             </div>
                                         </div>
                                     </div>
@@ -111,29 +116,27 @@
                             <div class="tab-pane" id="tab2">
 
                                 <div class="row">
-                                    @if (isset($Staffs) && count($Staffs) > 0)
-                                        @foreach ($Staffs as $staff)
+                                    @if (isset($bookings) && count($bookings) > 0)
+                                        @foreach ($bookings as $booking)
                                             <div class="col-md-4">
                                                 <div class="card">
                                                     <div class="card-body no-padding ">
                                                         <div class="doctor-profile">
                                                             <div class="profile-usertitle">
-                                                                <div class="doctor-name">{{ $staff->first_name }}
-                                                                    {{ $staff->last_name }}
+                                                                <div class="doctor-name">{{ $booking->room->name }}
+                                                                    
                                                                 </div>
-                                                                <div class="name-center"><b>Rank:</b>
-                                                                    {{ $staff->rank }}
+                                                                <div class="name-center"><b>Amount:</b>
+                                                                    {{ $booking->amount }}
                                                                 </div>
                                                             </div>
-                                                            <p><b>Unit:</b> {{ $staff->unit }}</p>
-                                                            <p><b>Leave Days:</b>
-                                                                {{ 30 - intval($staff->leave_days) == 0 ? 30 : 30 - intval($staff->leave_days) }}
+                                                            <p><b>Check In:</b> {{  date('d-m-Y', strtotime($booking->check_in)) }}</p>
+                                                            
+                                                            <p><b>Check Out:</b>
+                                                                {{date('d-m-Y', strtotime($booking->check_out))}}
+                                                            </b>
                                                             </p>
-                                                            <div class="profile-userbuttons">
-                                                                <a href="/leave_request/{{ base64_encode($staff->id) }}"
-                                                                    class="btn btn-circle deepPink-bgcolor btn-sm">Request
-                                                                    Leave</a>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

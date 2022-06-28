@@ -11,7 +11,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="description" content="Responsive Admin Template" />
     <meta name="author" content="SmartUniversity" />
-    <title>Smart University | Bootstrap Responsive Admin Template</title>
+    <title>Guest House</title>
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
     <!-- icons -->
@@ -83,17 +83,19 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link nav-toggle"> <i data-feather="user"></i>
-                                    <span class="title">Staffs</span> <span class="arrow"></span>
+                                    <span class="title">Bookings</span> <span class="arrow"></span>
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item">
-                                        <a href="/add_staffs" class="nav-link "> <span class="title">Add
-                                                Staffs</span>
+                                        <a href="/add_rooms" class="nav-link "> <span class="title">Add Room </span></span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/all_staffs" class="nav-link "> <span class="title">All
-                                                Staffs</span>
+                                        <a href="/rooms" class="nav-link "> <span class="title">Book a Room</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="/bookings_report" class="nav-link "> <span class="title">Report</span>
                                         </a>
                                     </li>
                                 </ul>
