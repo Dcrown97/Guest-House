@@ -60,7 +60,17 @@
                                                                     id="search">
                                                             </label>
                                                         </div>
+                                                        
+                                                       
                                                     </div>
+
+                                                     <div class="col-md-6 col-sm-6 col-6">
+                                                            {{-- <label for="sort">Sort By</label> --}}
+                                                            <select class="form-select input-height" style="margin-bottom: 10px" name="drink_id"
+                                                                id="sort">
+                                                                <option value="">Sort By</option>
+                                                            </select>
+                                                        </div>
                                                 </div>
                                                 <table
                                                     class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
@@ -131,7 +141,7 @@
                                                                 </div>
                                                             </div>
                                                             <p><b>Check In:</b> {{  date('d-m-Y', strtotime($booking->check_in)) }}</p>
-                                                            
+
                                                             <p><b>Check Out:</b>
                                                                 {{date('d-m-Y', strtotime($booking->check_out))}}
                                                             </b>

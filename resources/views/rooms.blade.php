@@ -20,12 +20,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tabbable-line">
-                        <ul class="nav customtab nav-tabs" role="tablist">
+                        {{-- <ul class="nav customtab nav-tabs" role="tablist">
                             <li class="nav-item"><a href="#tab1" class="nav-link active" data-bs-toggle="tab">List
                                     View</a></li>
                             <li class="nav-item"><a href="#tab2" class="nav-link" data-bs-toggle="tab">Grid
                                     View</a></li>
-                        </ul>
+                        </ul> --}}
                         <div class="tab-content">
                             <div class="tab-pane active fontawesome-demo" id="tab1">
                                 <div class="row">
@@ -102,14 +102,14 @@
                                                             @endif
                                                         </tbody>
                                                     </table>
-                                                    {{-- {{ $rooms->links('vendor.pagination.bootstrap-4') }} --}}
+                                                    {{ $rooms->links('vendor.pagination.bootstrap-4') }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="tab-pane" id="tab2">
+                            {{-- <div class="tab-pane" id="tab2">
 
                                 <div class="row">
                                     @if (isset($rooms) && count($rooms) > 0)
@@ -142,7 +142,7 @@
                                         @endforeach
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,7 @@ class RoomsController extends Controller
 
 
     public function rooms_list(){
-        $rooms = Room::all();
+        $rooms = Room::paginate(10);
         return view('rooms', ['rooms' => $rooms]);
     }
 
@@ -59,12 +59,13 @@ class RoomsController extends Controller
         // dd($room);
 
         if($request->isMethod('post')){
-           
+        //    dd($request->all());
          
             try{
                 $room = Room::where('id', $id)->first()->update([
                     'name' => $request->name,
                     'price' => $request->price,
+                    'status' => $request->status,
                 ]);
             
                 if ($room) {
