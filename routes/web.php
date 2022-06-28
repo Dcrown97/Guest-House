@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\LeavereportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,14 @@ Route::match(['get', 'post'], '/staffs_about_to_resume', [LeavereportController:
 Route::get('search_staffs', [LeavereportController::class, 'searchStaffs'])->name('search_staffs');
 
 Route::get('search_staffs_on_leave', [LeavereportController::class, 'searchStaffsOnLeave'])->name('search_staffs_on_leave');
+
+
+Route::match(['get', 'post'], '/food', [FoodController::class, 'Food']);
+Route::match(['get', 'post'], '/add_food', [FoodController::class, 'addFood'])->name('add_food');
+Route::match(['get', 'post'], '/order_food', [FoodController::class, 'orderFood'])->name('order_food');
+Route::match(['get', 'post'], '/food_price/{id}', [FoodController::class, 'getFoodPrice']);
+Route::match(['get', 'post'], '/drinks', [FoodController::class, 'Drinks']);
+Route::match(['get', 'post'], '/add_drinks', [FoodController::class, 'addDrinks'])->name('add_drinks');
+Route::match(['get', 'post'], '/order_drinks', [FoodController::class, 'orderDrink'])->name('order_drinks');
+Route::match(['get', 'post'], '/drink_price/{id}', [FoodController::class, 'getDrinkPrice']);
 
