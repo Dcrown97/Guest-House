@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
+
     public function Food()
     {
         $Foods = Food::all();
