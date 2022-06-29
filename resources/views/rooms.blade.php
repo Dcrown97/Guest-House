@@ -86,14 +86,16 @@
                                                                     <td>{{ $room->name }}
                                                                     </td>
                                                                     <td class="center">{{ $room->price }}</td>
-                                                                    <td class="{{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" >{{ ucfirst($room->status) }}</td>
+                                                                    <td>  <div class="justify-content-between"> <a class="btn btn-lg {{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" style="width:150px "> {{ ucfirst($room->status) }}  </a> </div> </td>
                                                                     </td>
                                                                     <td>
                                                                         <div class="justify-content-between">
                                                                             <a href="/book/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-primary btn-lg">Book</a>
                                                                             <a href="/edit_room/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-warning btn-lg">Edit</a>
+                                                                                class="btn btn-warning btn-lg">Update</a>
+                                                                            <a href="/delete/{{ base64_encode($room->id) }}"
+                                                                                class="btn btn-danger btn-lg">Delete</a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -151,7 +153,7 @@
     </div>
 @endsection
 
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+{{-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> --}}
 
 <script>
     var searchRquest = [];

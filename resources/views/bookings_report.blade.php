@@ -69,6 +69,9 @@
                                                             <select class="form-select input-height" style="margin-bottom: 10px" name="drink_id"
                                                                 id="sort">
                                                                 <option value="">Sort By</option>
+                                                                <option value="">Today</option>
+                                                                <option value="">Yesterday</option>
+                                                                <option value="">All</option>
                                                             </select>
                                                         </div>
                                                 </div>

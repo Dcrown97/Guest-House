@@ -82,4 +82,18 @@ class RoomsController extends Controller
         return view('edit_room', ['room' => $room]);
     }
 
+    // Delete room
+    public function delete_room($id){
+        $room = Room::find(base64_decode($id));
+        if($room->status == 'booked'){
+            return redirect()->route('rooms')->with('error', 'Room is already booked, cannot delete');  //if room is booked, cannot delete
+        }
+        $deleted = $room->delete();
+        if ($deleted) {
+            return redirect()->route('rooms')->with('success', 'Room deleted successfully');
+        } else {
+            return redirect()->route('rooms')->with('error', 'Failed to delete room');
+        }
+    }
+
 }

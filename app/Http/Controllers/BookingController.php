@@ -10,6 +10,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BookingController extends Controller
 {
+    
+    //middleware to check if user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function book(Request $request , $id){
         $room = Room::find(base64_decode($id));
         if ($room->status == 'booked'){
