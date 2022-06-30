@@ -6,10 +6,18 @@ use App\Models\Drink;
 use App\Models\Food;
 use App\Models\FoodOrder;
 use App\Models\OrderDrink;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
+
+    //middleware to check if user is logged in
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function Food()
     {
@@ -91,9 +99,34 @@ class FoodController extends Controller
 
     public function foodReport () {
 
-        $foodReports = FoodOrder::all();
+        // $foodReports = FoodOrder::all();
+        //food sold today
+        $foodReports = FoodOrder::with('food')->whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate(15);
 
-        return view('foodReport', compact('foodReports'));
+        //total food sold today amount
+        $foodReports_amount = FoodOrder::whereDate('created_at', Carbon::today())->sum('ordered_food_price');
+        // dd($foodReports_amount);
+
+        //food sold yesterday
+        $foodReports_yesterday = FoodOrder::with('food')->whereDate('created_at', Carbon::yesterday())->orderBy('created_at', 'desc')->paginate(15);
+
+        //total food sold yesterday amount
+        $foodReports_yesterday_amount = FoodOrder::whereDate('created_at', Carbon::yesterday())->sum('ordered_food_price');
+        // dd($foodReports_yesterday_amount);
+
+        //food sold this week
+        $foodReports_week = FoodOrder::with('food')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('created_at', 'desc')->paginate(15);
+
+        //total food sold this week amount
+        $foodReports_week_amount = FoodOrder::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum('ordered_food_price');
+
+        //food sold all time
+        $foodReports_all = FoodOrder::with('food')->orderBy('created_at', 'desc')->paginate(15);
+
+        //total food sold all time amount
+        $foodReports_all_amount = FoodOrder::sum('ordered_food_price');
+
+        return view('foodReport', compact('foodReports', 'foodReports_amount', 'foodReports_yesterday', 'foodReports_yesterday_amount', 'foodReports_week', 'foodReports_week_amount', 'foodReports_all', 'foodReports_all_amount'));
     }
 
 
@@ -184,6 +217,12 @@ class FoodController extends Controller
             $OrderedDrinks->ordered_total_price = $request->ordered_total_price;
             $saved = $OrderedDrinks->save();
             if ($saved) {
+
+                //update drink quantity on drink table
+                $drink = Drink::find($request->drink_id);
+                $drink->num_of_drink = $drink->num_of_drink - $request->ordered_drink_quantity;
+                $drink->save();
+
                 return redirect('/drinks')->with('success', 'Drink Ordered Successfully');
             } else {
                 return redirect('/drinks')->with('error', 'Drink Order Failed');
@@ -194,8 +233,32 @@ class FoodController extends Controller
     }
 
     public function drinksReport () {
+       //drinks sold today
+        $drinks = OrderDrink::with('drink')->whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate(15);
+        //get total drinks sold today and total price
+        $total_qty_today = OrderDrink::with('drink')->whereDate('created_at', Carbon::today())->sum('ordered_drink_quantity');
+        $total_amount_today = OrderDrink::with('drink')->whereDate('created_at', Carbon::today())->sum('ordered_total_price');
 
-        return view('drinksReport');
+        //drinks sold yesterday
+        $drinksYesterday = OrderDrink::with('drink')->whereDate('created_at', Carbon::yesterday())->orderBy('created_at', 'desc')->paginate(15);
+        //get total drinks sold yesterday and total price
+        $total_qty_yesterday = OrderDrink::with('drink')->whereDate('created_at', Carbon::yesterday())->sum('ordered_drink_quantity');
+        $total_amount_yesterday = OrderDrink::with('drink')->whereDate('created_at', Carbon::yesterday())->sum('ordered_total_price');
+
+        //drinks sold this week
+        $drinksWeek = OrderDrink::with('drink')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->orderBy('created_at', 'desc')->paginate(15);
+        //get total drinks sold this week and total price
+        $total_qty_week = OrderDrink::with('drink')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum('ordered_drink_quantity');
+        $total_amount_week = OrderDrink::with('drink')->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->sum('ordered_total_price');
+
+        //all drinks sold
+        $drinksAll = OrderDrink::with('drink')->orderBy('created_at', 'desc')->paginate(15);
+        //get total drinks sold and total price
+        $total_qty_all = OrderDrink::with('drink')->sum('ordered_drink_quantity');
+        $total_amount_all = OrderDrink::with('drink')->sum('ordered_total_price');
+        // dd($drinks);
+
+        return view('drinksReport', compact('drinks','drinksYesterday','drinksWeek','drinksAll','total_qty_today','total_amount_today','total_qty_yesterday','total_amount_yesterday','total_qty_week','total_amount_week','total_qty_all','total_amount_all'));
     }
 
     public function getDrinkPrice(Request $request)
@@ -203,10 +266,15 @@ class FoodController extends Controller
         // dd($request->drink_id);
         if ($request->drink_id !== null) {
             $DrinkPrice = Drink::find($request->drink_id);
-            // dd($DrinkPrice);
-            echo json_encode($DrinkPrice->drink_price);
+
+            //price and quantity of drink
+            echo json_encode(['price' => $DrinkPrice->drink_price, 'quantity' => $DrinkPrice->num_of_drink]);
+           
         } else {
             echo json_decode('No Drink Price Selected');
         }
     }
+
+
+
 }

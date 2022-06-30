@@ -71,7 +71,7 @@
                             <span class="info-box-icon push-bottom"><i data-feather=""></i></span>
                             <div class="info-box-content">
                                 {{-- <p style="font-size: 8px" >Booking and Restaurant</p> --}}
-                                <span class="info-box-text">Total Sales</span>
+                                <span class="info-box-text">Total Sales<sup>(All TIme)</sup></span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 {{-- <span>All</span> --}}
                                 <span>N{{ number_format($total_sales) }}</span>

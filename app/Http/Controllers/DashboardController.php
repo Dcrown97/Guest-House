@@ -21,11 +21,18 @@ class DashboardController extends Controller
         $available_rooms = Room::where('status', 'available')->count();
         $booked_rooms = Room::where('status', 'booked')->count();
         //total sales 
-        $total_sales = Booking::sum('amount');
+        $total_bookings = Booking::sum('amount');
+        $total_amount_all = OrderDrink::with('drink')->sum('ordered_total_price');
+        $foodReports_all_amount = FoodOrder::sum('ordered_food_price');
+        $total_sales = $total_bookings + $total_amount_all + $foodReports_all_amount;
+        
         // dd($total_sales);
 
         //todays bookings sales
         $today_sales = Booking::whereDate('created_at', date('Y-m-d'))->sum('amount');
+     
+
+
         // dd($today_sales);
 
         //todays food sales
