@@ -5,79 +5,437 @@
             <div class="page-bar">
                 <div class="page-title-breadcrumb">
                     <div class=" pull-left">
-                        <div class="page-title">Drinks Report</div>
+                        <div class="page-title">Drinks</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i
                                 class="fa fa-angle-right"></i>
                         </li>
-                        <li><a class="parent-item" href="/drinks">Drinks</a>&nbsp;<i
-                                class="fa fa-angle-right"></i>
+                        {{-- <li><a class="parent-item" href="#">Other Staff</a>&nbsp;<i class="fa fa-angle-right"></i> --}}
                         </li>
-                        <li class="active">Drinks Report</li>
+                        <li class="active">Drinks</li>
                     </ol>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div class="card-box">
-                        <div class="card-head">
-                            <header>Drinks Report</header>
-                            <button id="sdntmenu" class="mdl-button mdl-js-button mdl-button--icon pull-right"
-                                data-upgraded=",MaterialButton">
-                                <i class="material-icons">more_vert</i>
-                            </button>
-                            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                data-mdl-for="sdntmenu">
-                                <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action
-                                </li>
-                                <li class="mdl-menu__item"><i class="material-icons">print</i>Another action
-                                </li>
-                                <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else
-                                    here</li>
-                            </ul>
-                        </div>
-                        <div class="card-body ">
-                            <div id="example4_filter" class="dataTables_filter" style="margin-bottom: 10px">
+                <div class="col-md-12">
+                    <div class="tabbable-line">
+                        <ul class="nav customtab nav-tabs" role="tablist">
+                            <li class="nav-item"><a href="#tab1" class="nav-link active" data-bs-toggle="tab">Today</a></li>
+                            <li class="nav-item"><a href="#tab2" class="nav-link" data-bs-toggle="tab">Yesterday</a></li>
+                            <li class="nav-item"><a href="#tab3" class="nav-link" data-bs-toggle="tab">This week</a></li>
+                            <li class="nav-item"><a href="#tab4" class="nav-link" data-bs-toggle="tab">All</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active fontawesome-demo" id="tab1">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-head">
+                                                <header></header>
+                                                <div class="tools">
+                                                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                                    <a class="t-collapse btn-color fa fa-chevron-down"
+                                                        href="javascript:;"></a>
+                                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body ">
+                                                 @include('flash.flash')    
+                                                <div class="row">
+                                                    {{-- <div class="col-md-6 col-sm-6 col-6">
+                                                        <div class="btn-group">
+                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
+                                                                Add More Rooms <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
 
-                                <input type="search" class="form-control form-control-sm" placeholder="Search"
-                                    aria-controls="example4" id="search">
+                                                    </div> --}}
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <div id="example4_filter" class="dataTables_filter">
+                                                            <label>
+                                                                <input type="text" style="margin-bottom: 10px"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Search" aria-controls="example4"
+                                                                    id="search">
+                                                            </label>
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b> Total Qty: {{ $total_qty_today }} </b>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                       <b>Total Amount: N{{ number_format($total_amount_today) }}</b>
+                                                        
+                                                       
+                                                    </div>
 
+                                                     
+                                                </div>
+                                                <table
+                                                    class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                                    id="example4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th> Name </th>
+                                                            <th> Available </th>
+                                                            <th>Amount</th>
+                                                            <th> Quantity </th>
+                                                            <th>TIme</th>
+                                                            {{-- <th> Leave Days </th> --}}
+                                                            {{-- <th> Date </th> --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="result"></tbody>
+                                                    <tbody id="old">
+                                                        @if (isset($drinks) && count($drinks) > 0)
+                                                            @foreach ($drinks as $drink)
+                                                                <tr class="odd gradeX">
+                                                                    <td class="patient-img">
+                                                                        {{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $drink->drink->drink_name }}
+                                                                    </td>
+                                                                    <td class="center">{{ $drink->drink->num_of_drink }}</td>
+                                                                    <td>N{{ 
+                                                                        number_format($drink->ordered_total_price)
+                                                                     }}</td>
+                                                                    <td>{{ 
+                                                                        
+                                                                        $drink->ordered_drink_quantity
+                                                                
+                                                                        
+                                                                     
+                                                                     }}</td>
+                                                                   
+                                                                    </td>
+                                                                    <td>
+                                                                       {{ $drink->created_at->format('y-m-d H:m:s') }} ({{ $drink->created_at->diffForHumans() }})
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                    {{ $drinks->links('vendor.pagination.bootstrap-4') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <table
-                                class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
-                                id="example4">
-                                <thead>
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>Title </th>
-                                        <th> Type </th>
-                                        <th> Start Date </th>
-                                        <th> End Date </th>
-                                        <th> Days taken </th>
-                                        <th> Days Left </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="result"></tr>
+                            <div class="tab-pane fontawesome-demo" id="tab2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-head">
+                                                <header></header>
+                                                <div class="tools">
+                                                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                                    <a class="t-collapse btn-color fa fa-chevron-down"
+                                                        href="javascript:;"></a>
+                                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body ">
+                                                 @include('flash.flash')    
+                                                <div class="row">
+                                                    {{-- <div class="col-md-6 col-sm-6 col-6">
+                                                        <div class="btn-group">
+                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
+                                                                Add More Rooms <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
 
-                                    <tr class="odd gradeX" id="old">
-                                        <td>1</td>
-                                        <td>sfddssfs
-                                        </td>
-                                        <td class="left">sadfs</td>
-                                        <td class="left">dsfdsf</td>
-                                        <td class="left">dsfsfd</td>
-                                        <td class="left">dsfdsf</td>
-                                        <td class="left">
-                                            zfdsfdfd
-                                        </td>
-                                    </tr>
+                                                    </div> --}}
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <div id="example4_filter" class="dataTables_filter">
+                                                            <label>
+                                                                <input type="text" style="margin-bottom: 10px"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Search" aria-controls="example4"
+                                                                    id="search">
+                                                            </label>
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b> Total Qty: {{ $total_qty_yesterday }} </b>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                       <b>Total Amount: N{{ number_format($total_amount_yesterday) }}</b>
+                                                        
+                                                       
+                                                    </div>
 
+                                                     
+                                                </div>
+                                                <table
+                                                    class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                                    id="example4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th> Name </th>
+                                                            <th> Available </th>
+                                                            <th>Amount</th>
+                                                            <th> Quantity </th>
+                                                            <th>Time</th>
+                                                            {{-- <th> Leave Days </th> --}}
+                                                            {{-- <th> Date </th> --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="result"></tbody>
+                                                    <tbody id="old">
+                                                        @if (isset($drinksYesterday) && count($drinks) > 0)
+                                                            @foreach ($drinksYesterday as $drink)
+                                                                <tr class="odd gradeX">
+                                                                    <td class="patient-img">
+                                                                        {{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $drink->drink->drink_name }}
+                                                                    </td>
+                                                                    <td class="center">{{ $drink->drink->num_of_drink }}</td>
+                                                                    <td>N{{ 
+                                                                        number_format($drink->ordered_total_price)
+                                                                     }}</td>
+                                                                    <td>{{ 
+                                                                        
+                                                                        $drink->ordered_drink_quantity
+                                                                
+                                                                        
+                                                                     
+                                                                     }}</td>
+                                                                   
+                                                                    </td>
+                                                                    <td>
+                                                                       {{ $drink->created_at->format('y-m-d H:m:s') }} ({{ $drink->created_at->diffForHumans() }})
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
 
-                                </tbody>
-                            </table>
-                            {{-- {{ $staffs_on_leave->links('vendor.pagination.bootstrap-4') }} --}}
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                    {{ $drinksYesterday->links('vendor.pagination.bootstrap-4') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fontawesome-demo" id="tab3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-head">
+                                                <header></header>
+                                                <div class="tools">
+                                                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                                    <a class="t-collapse btn-color fa fa-chevron-down"
+                                                        href="javascript:;"></a>
+                                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body ">
+                                                 @include('flash.flash')    
+                                                <div class="row">
+                                                    {{-- <div class="col-md-6 col-sm-6 col-6">
+                                                        <div class="btn-group">
+                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
+                                                                Add More Rooms <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+
+                                                    </div> --}}
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <div id="example4_filter" class="dataTables_filter">
+                                                            <label>
+                                                                <input type="text" style="margin-bottom: 10px"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Search" aria-controls="example4"
+                                                                    id="search">
+                                                            </label>
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b> Total Qty: {{ $total_qty_week }} </b>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                       <b>Total Amount: N{{ number_format($total_amount_week) }}</b>
+                                                        
+                                                       
+                                                    </div>
+
+                                                     
+                                                </div>
+                                                <table
+                                                    class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                                    id="example4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th> Name </th>
+                                                            <th> Available </th>
+                                                            <th>Amount</th>
+                                                            <th> Quantity </th>
+                                                            <th>TIme</th>
+                                                            {{-- <th> Leave Days </th> --}}
+                                                            {{-- <th> Date </th> --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="result"></tbody>
+                                                    <tbody id="old">
+                                                        @if (isset($drinksWeek) && count($drinks) > 0)
+                                                            @foreach ($drinksWeek as $drink)
+                                                                <tr class="odd gradeX">
+                                                                    <td class="patient-img">
+                                                                        {{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $drink->drink->drink_name }}
+                                                                    </td>
+                                                                    <td class="center">{{ $drink->drink->num_of_drink }}</td>
+                                                                    <td>N{{ 
+                                                                        number_format($drink->ordered_total_price)
+                                                                     }}</td>
+                                                                    <td>{{ 
+                                                                        
+                                                                        $drink->ordered_drink_quantity
+                                                                
+                                                                        
+                                                                     
+                                                                     }}</td>
+                                                                   
+                                                                    </td>
+                                                                    <td>
+                                                                       {{ $drink->created_at->format('y-m-d H:m:s') }} ({{ $drink->created_at->diffForHumans() }})
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                    {{ $drinksWeek->links('vendor.pagination.bootstrap-4') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fontawesome-demo" id="tab4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-head">
+                                                <header></header>
+                                                <div class="tools">
+                                                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                                                    <a class="t-collapse btn-color fa fa-chevron-down"
+                                                        href="javascript:;"></a>
+                                                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-body ">
+                                                 @include('flash.flash')    
+                                                <div class="row">
+                                                    {{-- <div class="col-md-6 col-sm-6 col-6">
+                                                        <div class="btn-group">
+                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
+                                                                Add More Rooms <i class="fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+
+                                                    </div> --}}
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <div id="example4_filter" class="dataTables_filter">
+                                                            <label>
+                                                                <input type="text" style="margin-bottom: 10px"
+                                                                    class="form-control form-control-sm"
+                                                                    placeholder="Search" aria-controls="example4"
+                                                                    id="search">
+                                                            </label>
+                                                        </div>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b> Total Qty: {{ $total_qty_all }} </b>
+                                                        
+                                                       
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                       <b>Total Amount: N{{ number_format($total_amount_all) }}</b>
+                                                        
+                                                       
+                                                    </div>
+
+                                                     
+                                                </div>
+                                                <table
+                                                    class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                                    id="example4">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th> Name </th>
+                                                            <th> Available </th>
+                                                            <th>Amount</th>
+                                                            <th> Quantity </th>
+                                                            <th>TIme</th>
+                                                            {{-- <th> Leave Days </th> --}}
+                                                            {{-- <th> Date </th> --}}
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="result"></tbody>
+                                                    <tbody id="old">
+                                                        @if (isset($drinksAll) && count($drinks) > 0)
+                                                            @foreach ($drinksAll as $drink)
+                                                                <tr class="odd gradeX">
+                                                                    <td class="patient-img">
+                                                                        {{ $loop->iteration }}
+                                                                    </td>
+                                                                    <td>{{ $drink->drink->drink_name }}
+                                                                    </td>
+                                                                    <td class="center">{{ $drink->drink->num_of_drink }}</td>
+                                                                    <td>N{{ 
+                                                                        number_format($drink->ordered_total_price)
+                                                                     }}</td>
+                                                                    <td>{{ 
+                                                                        
+                                                                        $drink->ordered_drink_quantity
+                                                                
+                                                                        
+                                                                     
+                                                                     }}</td>
+                                                                   
+                                                                    </td>
+                                                                    <td>
+                                                                       {{ $drink->created_at->format('y-m-d H:m:s') }} ({{ $drink->created_at->diffForHumans() }})
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                    {{ $drinksAll->links('vendor.pagination.bootstrap-4') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -86,14 +444,12 @@
     </div>
 @endsection
 
-
-{{-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
     var searchRquest = [];
     var minLength = 3;
     $(function() {
-        console.log('first')
         $("#search").keyup(function() {
             console.log('search');
             let value = $(this).val();
@@ -103,17 +459,17 @@
                     // searchRquest.abort();
 
                     searchRquest = $.ajax({
-                        url: "/search_staffs_on_leave",
+                        url: "/search_staffs",
                         type: "GET",
                         data: {
                             search: value
                         },
                         success: function(data) {
                             console.log('data success', data);
+                            var html = '';
                             var response = JSON.parse(data);
                             console.log('response', response);
-                            
-                            var html = '';
+
                             if (response.length > 0) {
                                 $.each(response, function(key, value) {
                                     console.log('value', value);
@@ -123,11 +479,9 @@
                                         ${key + 1}  </td>
                                         <td>${value.first_name} ${value.last_name}
                                         </td>
-                                        <td class="center">${value.leave_type}</td>
-                                        <td>${value.commencement_date}</td>
-                                        <td>${value.reumption_date}</td>
-                                        <td>${value.num_of_days}</td>
-                                        <td>${30 - $value.num_of_days}</td>
+                                        <td class="center">${value.rank}</td>
+                                        <td>${value.unit}</td>
+                                        <td>${30 - parseInt(value.leave_days) == 0 ? 30 : 30 - parseInt(value.leave_days)}
                                         </td>
                                         <td>
                                             <div class="profile-userbuttons">
@@ -164,4 +518,4 @@
             }
         });
     });
-</script> --}}
+</script>

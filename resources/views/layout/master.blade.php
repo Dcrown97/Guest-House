@@ -120,12 +120,7 @@
                                                 class="title">Drinks</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-
-                                        <a href="/food_report" class="nav-link"> <span
-                                                class="title">Food Report</span>
-                                        </a>
-                                    </li>
+                                   
                                     <li class="nav-item">
 
                                         <a href="/drinks_report" class="nav-link "> <span

@@ -19,40 +19,33 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="card card-box">
                         <div class="card-head">
-                            <header>Basic Information</header>
+                            <header>Drinks</header>
                             <button id="panel-button" class="mdl-button mdl-js-button mdl-button--icon pull-right"
                                 data-upgraded=",MaterialButton">
                                 <i class="material-icons">more_vert</i>
                             </button>
-                            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                data-mdl-for="panel-button">
-                                <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action
-                                </li>
-                                <li class="mdl-menu__item"><i class="material-icons">print</i>Another action
-                                </li>
-                                <li class="mdl-menu__item"><i class="material-icons">favorite</i>Something else
-                                    here</li>
-                            </ul>
+                            
                         </div>
 
                         <div class="panel tab-border card-box">
                             <header class="panel-heading panel-heading-gray custom-tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a href="#add_food" data-bs-toggle="tab" class="active">
-                                            </i> Add Drinks
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#order_food" data-bs-toggle="tab">
+                                        <a href="#order_food" data-bs-toggle="tab" class="active">
                                             </i> Order Drinks
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="#add_food" data-bs-toggle="tab">
+                                            </i> Add Drinks
+                                        </a>
+                                    </li>
+                                    
                                 </ul>
                             </header>
                             <div class="panel-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="add_food">
+                                    <div class="tab-pane" id="add_food">
                                         <div class="card-body" id="bar-parent">
                                             @include('flash.flash')
                                             <form action="{{ route('add_drinks') }}" method="POST" id="form_sample_1"
@@ -103,8 +96,9 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane " id="order_food">
+                                    <div class="tab-pane active" id="order_food">
                                         <div class="card-body" id="bar-parent">
+                                            <b id="available" class="text-success h3"></b>
                                             @include('flash.flash')
                                             <form action="{{ route('order_drinks') }}" method="POST" id="form_sample_1"
                                                 class="form-horizontal">
@@ -164,8 +158,8 @@
                                                             <div class="offset-md-3 col-md-9">
                                                                 <button type="submit"
                                                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Submit</button>
-                                                                <button type="button"
-                                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</button>
+                                                                <a type="button" href="/drinks"
+                                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -205,12 +199,14 @@
                 },
                 success: function(response) {
                     // alert('yes', response.room)
-                    // console.log('response', response);
+                    console.log('response', response);
                     var response = JSON.parse(response);
                     console.log('responsuuue', response);
                     // $('#sub_category').empty();
                     $('#error1').text('');
-                    $('#drink_price').val(response)
+                    $('#drink_price').val(response.price)
+                    $('#available').html(`<b class="text-success h3">Available: ${response.quantity}</b>`);
+                    $('#ordered_drink_quantity').attr('max', response.quantity);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log("Oops!", "An error occurred.");

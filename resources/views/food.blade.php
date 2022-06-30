@@ -19,7 +19,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="card card-box">
                         <div class="card-head">
-                            <header>Basic Information</header>
+                            <header>Food</header>
                             <button id="panel-button" class="mdl-button mdl-js-button mdl-button--icon pull-right"
                                 data-upgraded=",MaterialButton">
                                 <i class="material-icons">more_vert</i>
@@ -39,12 +39,12 @@
                             <header class="panel-heading panel-heading-gray custom-tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a href="#order_food" data-bs-toggle="tab">
+                                        <a href="#order_food" data-bs-toggle="tab" class="active">
                                         </i> Order Food
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#add_food" data-bs-toggle="tab" class="active">
+                                    <a href="#add_food" data-bs-toggle="tab">
                                         </i> Add Food
                                     </a>
                                 </li>
@@ -52,7 +52,7 @@
                             </header>
                             <div class="panel-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="add_food">
+                                    <div class="tab-pane" id="add_food">
                                         <div class="card-body" id="bar-parent">
                                             @include('flash.flash')
                                             <form action="{{ route('add_food') }}" method="POST" id="form_sample_1"
@@ -93,10 +93,10 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="tab-pane " id="order_food">
+                                    <div class="tab-pane active" id="order_food">
                                         <div class="card-body" id="bar-parent">
                                             @include('flash.flash')
-                                            <form action="{{ route('order_drinks') }}" method="POST" id="form_sample_1"
+                                            <form action="{{ route('order_food') }}" method="POST" id="form_sample_1"
                                                 class="form-horizontal">
                                                 @csrf
                                                 <div class="form-body">
