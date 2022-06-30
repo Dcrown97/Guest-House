@@ -39,15 +39,15 @@
                             <header class="panel-heading panel-heading-gray custom-tab">
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item">
-                                        <a href="#add_food" data-bs-toggle="tab" class="active">
-                                            </i> Add Food
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a href="#order_food" data-bs-toggle="tab">
-                                            </i> Order Food
-                                        </a>
-                                    </li>
+                                        </i> Order Food
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#add_food" data-bs-toggle="tab" class="active">
+                                        </i> Add Food
+                                    </a>
+                                </li>
                                 </ul>
                             </header>
                             <div class="panel-body">
