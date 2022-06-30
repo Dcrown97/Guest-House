@@ -56,15 +56,12 @@
                                 </thead>
                                 <tbody>
                                     <tr id="result"></tr>
-                                    @foreach ($foodReports as $foodReport)
                                         <tr class="odd gradeX" id="old">
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $foodReport->food_id->food_name }}
-                                            </td>
+                                            <td>jsadhhdsa</td>
+                                            <td>jsbdxjsahj</td>
                                             <td class="left">sadfs</td>
                                             <td class="left">dsfdsf</td>
                                         </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                             {{-- {{ $foodReports->links('vendor.pagination.bootstrap-4') }} --}}
