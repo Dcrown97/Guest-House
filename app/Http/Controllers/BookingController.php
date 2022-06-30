@@ -33,6 +33,7 @@ class BookingController extends Controller
                 $request->validate([
                     'check_in' => 'required',
                     'check_out' => 'required',
+                    'customer_name' => 'required',
                 ]);
                 $booking = new Booking();
                 $booking->user_id = Auth::user()->id;
@@ -42,6 +43,8 @@ class BookingController extends Controller
                 $booking->room_price = $request->price;
                 $booking->amount = $request->amount;
                 $booking->days = $request->days;
+                $booking->customer_name = $request->customer_name;
+                $booking->customer_phone = $request->customer_phone;
                 //   $booking->status = 'pending';
                 $saved = $booking->save();
                 if ($saved) {

@@ -94,7 +94,7 @@
                                                                                 class="btn btn-primary btn-lg">Book</a>
                                                                             <a href="/edit_room/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-warning btn-lg">Update</a>
-                                                                            <a href="/delete/{{ base64_encode($room->id) }}"
+                                                                            <a onclick="return confirm('Are you sure you want to delete this room?')" href="/delete/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-danger btn-lg">Delete</a>
                                                                         </div>
                                                                     </td>

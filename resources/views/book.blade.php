@@ -105,7 +105,16 @@
                                                 placeholder="5000" class="form-control input-height" />
                                         </div>
                                     </div>
-                                    <input id="days" hidden name="days" type="text">
+                                    {{-- <input id="days" hidden  type="text"> --}}
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">No of Day(s)
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input type="text" id="days" name="days" readonly data-required="1"
+                                             class="form-control input-height" />
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">Total
                                             <span class="required"> * </span>
