@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('drink_id')->constrained();
             $table->string('ordered_drink_price');
             $table->string('ordered_drink_quantity');
+            $table->string('ordered_total_price');
             $table->timestamps();
         });
     }
