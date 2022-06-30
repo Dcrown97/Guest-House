@@ -20,12 +20,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="tabbable-line">
-                        <ul class="nav customtab nav-tabs" role="tablist">
+                        {{-- <ul class="nav customtab nav-tabs" role="tablist">
                             <li class="nav-item"><a href="#tab1" class="nav-link active" data-bs-toggle="tab">List
                                     View</a></li>
                             <li class="nav-item"><a href="#tab2" class="nav-link" data-bs-toggle="tab">Grid
                                     View</a></li>
-                        </ul>
+                        </ul> --}}
                         <div class="tab-content">
                             <div class="tab-pane active fontawesome-demo" id="tab1">
                                 <div class="row">
@@ -86,14 +86,16 @@
                                                                     <td>{{ $room->name }}
                                                                     </td>
                                                                     <td class="center">{{ $room->price }}</td>
-                                                                    <td class="{{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" >{{ ucfirst($room->status) }}</td>
+                                                                    <td>  <div class="justify-content-between"> <a class="btn btn-lg {{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" style="width:150px "> {{ ucfirst($room->status) }}  </a> </div> </td>
                                                                     </td>
                                                                     <td>
                                                                         <div class="justify-content-between">
                                                                             <a href="/book/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-primary btn-lg">Book</a>
                                                                             <a href="/edit_room/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-warning btn-lg">Edit</a>
+                                                                                class="btn btn-warning btn-lg">Update</a>
+                                                                            <a onclick="return confirm('Are you sure you want to delete this room?')" href="/delete/{{ base64_encode($room->id) }}"
+                                                                                class="btn btn-danger btn-lg">Delete</a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -102,14 +104,14 @@
                                                             @endif
                                                         </tbody>
                                                     </table>
-                                                    {{-- {{ $rooms->links('vendor.pagination.bootstrap-4') }} --}}
+                                                    {{ $rooms->links('vendor.pagination.bootstrap-4') }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="tab-pane" id="tab2">
+                            {{-- <div class="tab-pane" id="tab2">
 
                                 <div class="row">
                                     @if (isset($rooms) && count($rooms) > 0)
@@ -142,7 +144,7 @@
                                         @endforeach
                                     @endif
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -151,7 +153,7 @@
     </div>
 @endsection
 
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+{{-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> --}}
 
 <script>
     var searchRquest = [];

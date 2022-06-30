@@ -11,7 +11,7 @@
                         <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i
                                 class="fa fa-angle-right"></i>
                         </li>
-                        <li><a class="parent-item" href="/all_staffs">Staffs</a>&nbsp;<i class="fa fa-angle-right"></i>
+                        <li><a class="parent-item" href="/all_staffs">Room</a>&nbsp;<i class="fa fa-angle-right"></i>
                         </li>
                         <li class="active">Add Rooms</li>
                     </ol>

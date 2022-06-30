@@ -35,6 +35,7 @@ Route::match(['get', 'post'], '/add_rooms', [RoomsController::class, 'add_rooms'
 Route::match(['get', 'post'], '/rooms', [RoomsController::class, 'rooms_list'])->name('rooms');
 Route::match(['get', 'post'], '/edit_room/{id}', [RoomsController::class, 'edit_room'])->name('edit_room');
 Route::match(['get', 'post'], '/book/{id}', [BookingController::class, 'book'])->name('book');
+Route::match(['get', 'post'], '/delete/{id}', [RoomsController::class, 'delete_room'])->name('delete');
 Route::match(['get', 'post'], '/bookings_report', [BookingController::class, 'bookingsReport'])->name('bookings_report');
 Route::match(['get', 'post'], '/leave_request/{id}', [LeavereportController::class, 'LeaveRequest']);
 Route::match(['get', 'post'], '/add_leave_type', [LeavereportController::class, 'AddLeaveType'])->name('add_leave_type');

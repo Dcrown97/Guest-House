@@ -70,6 +70,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
+                                        <label class="control-label col-md-3">Customer Name
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input type="text"  name="customer_name" data-required="1"
+                                                placeholder="John" class="form-control input-height" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Customer Phone
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input type="text" name="customer_phone" data-required="1"
+                                                placeholder="Doe" class="form-control input-height" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="control-label col-md-3">Check In
                                             <span class="required"> * </span>
                                         </label>
@@ -87,7 +105,16 @@
                                                 placeholder="5000" class="form-control input-height" />
                                         </div>
                                     </div>
-                                    <input id="days" hidden name="days" type="text">
+                                    {{-- <input id="days" hidden  type="text"> --}}
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">No of Day(s)
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <input type="text" id="days" name="days" readonly data-required="1"
+                                             class="form-control input-height" />
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">Total
                                             <span class="required"> * </span>
@@ -120,7 +147,9 @@
     </div>
 @endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+    <script src="../leave_report/assets/plugins/jquery/jquery.min.js"></script>
+
 <script type="text/javascript" >
     $(document).ready(function(){
         $('#datefield1').change(function(){
@@ -130,6 +159,7 @@
             var check_out_date = new Date(check_out);
             var diff = check_out_date.getTime() - check_in_date.getTime();
             var days = diff/(1000*60*60*24);
+            console.log('differenbt', diff)
             var total = days * $('#price').val();
             $('#total').val(total);
             $('#days').val(days);

@@ -64,10 +64,16 @@
                                         <label class="control-label col-md-3">Status
                                             <span class="required"> * </span>
                                         </label>
-                                        <div class="col-md-5">
-                                            <input type="text" readonly name="status" value="{{ $room->status }}" data-required="1"
-                                                placeholder="5000" class="form-control input-height" />
-                                        </div>
+                                       
+                                           <div class="col-md-5">
+                                                            <select class="form-select input-height" name="status"
+                                                                >
+                                                                <option value="{{ $room->status }}">{{ ucfirst($room->status) }}</option>
+                                                                <option value="booked">Booked</option>
+                                                                <option value="available"> Available <option>
+                                                            </select>
+                                                        </div>
+                                
                                     </div>
 
                                     </div>
@@ -76,7 +82,7 @@
                                         <div class="row">
                                             <div class="offset-md-3 col-md-9">
                                                 <button type="submit"
-                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Edit</button>
+                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Update</button>
                                                 <a href="/rooms" class="btn btn-danger btn-circle"
                                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</a>
                                             </div>

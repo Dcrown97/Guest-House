@@ -8,8 +8,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RoomsController extends Controller
 {
+    // middleware to check if user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function add_rooms(Request $request){
-        $rooms = Room::all();
+        $rooms = Room::paginate(15);
 
         //get last room id
         $last_room_id = Room::orderBy('id', 'desc')->first();
@@ -49,7 +54,7 @@ class RoomsController extends Controller
 
 
     public function rooms_list(){
-        $rooms = Room::all();
+        $rooms = Room::paginate(10);
         return view('rooms', ['rooms' => $rooms]);
     }
 
@@ -59,12 +64,13 @@ class RoomsController extends Controller
         // dd($room);
 
         if($request->isMethod('post')){
-           
+        //    dd($request->all());
          
             try{
                 $room = Room::where('id', $id)->first()->update([
                     'name' => $request->name,
                     'price' => $request->price,
+                    'status' => $request->status,
                 ]);
             
                 if ($room) {
@@ -79,6 +85,20 @@ class RoomsController extends Controller
             
         }
         return view('edit_room', ['room' => $room]);
+    }
+
+    // Delete room
+    public function delete_room($id){
+        $room = Room::find(base64_decode($id));
+        if($room->status == 'booked'){
+            return redirect()->route('rooms')->with('error', 'Room is already booked, cannot delete');  //if room is booked, cannot delete
+        }
+        $deleted = $room->delete();
+        if ($deleted) {
+            return redirect()->route('rooms')->with('success', 'Room deleted successfully');
+        } else {
+            return redirect()->route('rooms')->with('error', 'Failed to delete room');
+        }
     }
 
 }

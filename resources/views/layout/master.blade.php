@@ -35,7 +35,7 @@
     <link href="../leave_report/assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="../leave_report/assets/css/theme/light/theme-color.css" rel="stylesheet" type="text/css" />
     <!-- favicon -->
-    <link rel="shortcut icon" href="https://www.einfosoft.com/templates/admin/smart/source/assets/img/favicon.ico" />
+    <link rel="shortcut icon" href="#" />
 </head>
 <!-- END HEAD -->
 
@@ -95,7 +95,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/bookings_report" class="nav-link "> <span class="title">Report</span>
+                                        <a href="/bookings_report" class="nav-link "> <span class="title">Bookings Report</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -121,6 +121,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
+
+                                        <a href="/food_report" class="nav-link"> <span
+                                                class="title">Food Report</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+
                                         <a href="/drinks_report" class="nav-link "> <span
                                                 class="title">Drinks Report</span>
                                         </a>
@@ -143,8 +150,8 @@
         <!-- end page container -->
         <!-- start footer -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2017 &copy; Smart University Theme By
-                <a href="mailto:redstartheme@gmail.com" target="_top" class="makerCss">Redstar Theme</a>
+            <div class="page-footer-inner"> 2022 &copy; Management
+                <a href="/" target="_top" class="makerCss">Guest House</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
@@ -178,7 +185,5 @@
     <!-- end js include path -->
 </body>
 
-
-<!-- Mirrored from www.einfosoft.com/templates/admin/smart/source/light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 18 May 2022 10:59:18 GMT -->
 
 </html>

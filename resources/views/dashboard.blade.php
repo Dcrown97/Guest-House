@@ -21,17 +21,15 @@
             <div class="state-overview">
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-12">
-                        <div class="info-box bg-b-green">
+                        <div class="info-box bg-green">
                             <span class="info-box-icon push-bottom"><i data-feather="users"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Rooms</span>
-                                <span class="info-box-number"> {{ $total_rooms > 0 ? $total_rooms : 0 }} </span>
+                                <span class="info-box-number">{{ $total_rooms > 0 ? $total_rooms : 0 }} </span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 45%"></div>
                                 </div>
-                                {{-- <span class="progress-description">
-                                    45% Increase in 28 Days
-                                </span> --}}
+                              
                             </div>
 
                         </div>
@@ -39,7 +37,7 @@
                     </div>
 
                     <div class="col-xl-3 col-md-6 col-12">
-                        <div class="info-box bg-b-yellow">
+                        <div class="info-box bg-b-green">
                             <span class="info-box-icon push-bottom"><i data-feather="user"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Available Rooms</span>
@@ -54,36 +52,116 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 col-12">
-                        <a href="/" style="color: white">
-                            <div class="info-box bg-b-blue">
-                                <div class="row">
-                                    <div class="col mt-0">
-                                        <h4 class="info-box-title">Booked Rooms</h4>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="l-bg-green info-icon">
-                                            <i class="fa fa-users pull-left col-orange font-30"></i>
-                                        </div>
-                                    </div>
+                        <div class="info-box bg-b-yellow">
+                            <span class="info-box-icon push-bottom"><i data-feather="user"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Booked Rooms</span>
+                                <span class="info-box-number">{{ $booked_rooms > 0 ? $booked_rooms : 0 }}</span>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
                                 </div>
-                                <h5 class="mt-1 mb-3 info-box-title">
-                                    {{ $booked_rooms > 0 ? $booked_rooms : 0 }}</h5>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
                             </div>
-                        </a>
+                        </div>
                     </div>
                     <div class="col-xl-3 col-md-6 col-12">
                         <div class="info-box bg-b-green">
-                            <div class="row">
-                                <div class="col mt-0">
-                                    <h4 class="info-box-title">Leave Types</h4>
+                            <span class="info-box-icon push-bottom"><i data-feather=""></i></span>
+                            <div class="info-box-content">
+                                {{-- <p style="font-size: 8px" >Booking and Restaurant</p> --}}
+                                <span class="info-box-text">Total Sales</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                {{-- <span>All</span> --}}
+                                <span>N{{ number_format($total_sales) }}</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
                                 </div>
-                                <div class="col-auto">
-                                    <div class="col-teal info-icon">
-                                        <i class="fa fa-user pull-left card-icon font-30"></i>
-                                    </div>
-                                </div>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
                             </div>
-                            {{-- <h1 class="mt-1 mb-3 info-box-title">{{  > 0 ? $leave_types : 0 }}</h1> --}}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+<hr>
+            <div class="state-overview">
+                <div class="row">
+                    <h3 class="text-primary" >Today's Overview</h3>
+                     <div class="col-xl-3 col-md-6 col-12">
+                        <div class="info-box bg-b-blue">
+                            <span class="info-box-icon push-bottom"><i data-feather="money"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Bookings</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <span>N {{ $today_sales }} </span>
+                                
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                                </div>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xl-3 col-md-6 col-12">
+                        <div class="info-box bg-b-blue">
+                            <span class="info-box-icon push-bottom"><i data-feather="money"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Food</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <span>N {{ $today_food_sales }} </span>
+                                
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                                </div>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xl-3 col-md-6 col-12">
+                        <div class="info-box bg-b-blue">
+                            <span class="info-box-icon push-bottom"><i data-feather="money"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Drinks</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <span>N {{ $today_drink_sales }} </span>
+                                
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                                </div>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-xl-3 col-md-6 col-12">
+                        <div class="info-box bg-b-blue">
+                            <span class="info-box-icon push-bottom"><i data-feather="money"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total</span>
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <span>N {{ number_format($total_today_sales) }} </span>
+                                
+                                {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 40%"></div>
+                                </div>
+                                {{-- <span class="progress-description">
+                                    40% Increase in 28 Days
+                                </span> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
