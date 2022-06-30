@@ -116,7 +116,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Food</span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
-                                <span>N {{ $today_sales }} </span>
+                                <span>N {{ $today_food_sales }} </span>
                                 
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 <div class="progress">
@@ -134,7 +134,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Drinks</span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
-                                <span>N {{ $today_sales }} </span>
+                                <span>N {{ $today_drink_sales }} </span>
                                 
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 <div class="progress">
@@ -152,7 +152,7 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">Total</span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
-                                <span>N {{ $today_sales }} </span>
+                                <span>N {{ number_format($total_today_sales) }} </span>
                                 
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 <div class="progress">

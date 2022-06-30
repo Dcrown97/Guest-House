@@ -8,8 +8,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RoomsController extends Controller
 {
+    // middleware to check if user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function add_rooms(Request $request){
-        $rooms = Room::all();
+        $rooms = Room::paginate(15);
 
         //get last room id
         $last_room_id = Room::orderBy('id', 'desc')->first();
