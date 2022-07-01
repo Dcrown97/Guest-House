@@ -92,6 +92,125 @@
                                                 </div>
                                             </form>
                                         </div>
+
+
+                                        <table
+                                        class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                        id="example4">
+                                        <thead>
+                                            <tr>
+                                                <th>S/N</th>
+                                                <th> Food </th>
+                                                <th> Price </th>
+                                                {{-- <th>Available</th> --}}
+
+                                                {{-- <th> Leave Days </th> --}}
+                                                <th> Action </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="result"></tbody>
+                                        <tbody id="old">
+                                            @if (isset($foods) && count($foods) > 0)
+                                            @foreach ($foods as $food)
+                                            <tr class="odd gradeX">
+                                                <td class="patient-img">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td>{{ $food->food_name }}
+                                                </td>
+                                                <td class="center">N{{ $food->food_price }}</td>
+                                               
+
+
+                                                <td>
+                                                    <div class="justify-content-between">
+                                                        
+                                                        <button type="button" class="btn btn-primary btn-lg"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#edit_modal{{ $food->id }}">
+                                                            <i class="fa fa-edit"></i>
+                                                            Edit
+                                                        </button>
+
+                                                        <a onclick="return confirm('Are you sure you want to delete this food?')"
+                                                            href="/delete_food/{{ base64_encode($food->id) }}"
+                                                            class="btn btn-danger btn-lg">Delete</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+
+
+
+                                            <!--Edit Modal -->
+                                            <div class="modal fade" id="edit_modal{{ $food->id }}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                Edit
+                                                                Food </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/edit_food" method="POST"
+                                                                id="form_sample_1" class="form-horizontal">
+                                                                @csrf
+                                                                <div class="form-body">
+                                                                    <input type="hidden" name="food_id"
+                                                                        value="{{ $food->id }}" id="">
+                                                                    <div class="form-group row">
+                                                                        <label class="control-label col-md-3">Food
+                                                                            Name
+                                                                            <span class="required"> * </span>
+                                                                        </label>
+                                                                        <div class="col-md-5">
+                                                                            <input type="text" name="food_name"
+                                                                                data-required="1"
+                                                                                placeholder="Food Name"
+                                                                                value="{{ $food->food_name }}"
+                                                                                class="form-control input-height" />
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                                    <div class="form-group row">
+                                                                        <label class="control-label col-md-3">Price
+                                                                            <span class="required"> * </span>
+                                                                        </label>
+                                                                        <div class="col-md-5">
+                                                                            <input type="number" name="food_price"
+                                                                                data-required="1"
+                                                                                placeholder="Enter Food Price"
+                                                                                value="{{ $food->food_price }}"
+                                                                                class="form-control input-height" />
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Save
+                                                                        changes</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- End of edit modal --}}
+
+                                            @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                      {{ $foods->links('vendor.pagination.bootstrap-4') }}
                                     </div>
                                     <div class="tab-pane active" id="order_food">
                                         <div class="card-body" id="bar-parent">
@@ -108,8 +227,8 @@
                                                             <select class="form-select input-height" name="food_id"
                                                                 id="food_id">
                                                                 <option value="">Select...</option>
-                                                                @if (isset($Foods) && count($Foods) > 0)
-                                                                    @foreach ($Foods as $food)
+                                                                @if (isset($foods) && count($foods) > 0)
+                                                                    @foreach ($foods as $food)
                                                                         <option value="{{ $food->id }}">
                                                                             {{ $food->food_name }}</option>
                                                                     @endforeach
@@ -141,10 +260,16 @@
                                                 </div>
                                             </form>
                                         </div>
+
                                     </div>
+
+
+                                    
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

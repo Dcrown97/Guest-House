@@ -56,7 +56,7 @@ Route::match(['get', 'post'], '/order_food', [FoodController::class, 'orderFood'
 Route::match(['get', 'post'], '/food_report', [FoodController::class, 'foodReport']);
 Route::match(['get', 'post'], '/food_price/{id}', [FoodController::class, 'getFoodPrice']);
 Route::match(['get', 'post'], '/delete_food/{id}', [FoodController::class, 'deleteFood']);
-Route::match(['get', 'post'], '/edit_food/{id}', [FoodController::class, 'updateFood']);
+Route::match(['get', 'post'], '/edit_food', [FoodController::class, 'editFood']);
 Route::match(['get', 'post'], '/drinks', [FoodController::class, 'Drinks']);
 Route::match(['get', 'post'], '/add_drinks', [FoodController::class, 'addDrinks'])->name('add_drinks');
 Route::match(['get', 'post'], '/order_drinks', [FoodController::class, 'orderDrink'])->name('order_drinks');
