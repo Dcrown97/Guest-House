@@ -153,7 +153,7 @@
 @endsection
 
 
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="../leave_report/assets/plugins/jquery/jquery.min.js"></script>
 
 <script>
     $(document).ready(function() {

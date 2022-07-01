@@ -36,11 +36,20 @@ class BookingController extends Controller
                     'check_out' => 'required',
                     'customer_name' => 'required',
                 ]);
+
+                //check if check in date is less than check out date
+                if(Carbon::parse($request->check_in)->format('Y-m-d') > Carbon::parse($request->check_out)->format('Y-m-d')){
+                    Alert::error('Error', 'Check in date must be less than check out date');
+                    return back()->with('error', 'Check in date must be less than check out date');
+                }
+
                 $booking = new Booking();
                 $booking->user_id = Auth::user()->id;
                 $booking->room_id = $room->id;
                 $booking->check_in = $request->check_in;
-                $booking->check_out = $request->check_out;
+                // $booking->check_out = $request->check_out;
+                //check_out time must be 12noon of the selected check out date
+                $booking->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
                 $booking->room_price = $request->price;
                 $booking->amount = $request->amount;
                 $booking->days = $request->days;
