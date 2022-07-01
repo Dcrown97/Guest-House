@@ -34,7 +34,7 @@
                         <li class="active">Dashboard</li>
                     </ol>
                     <div>
-                        <button class="btn mt-3 ms-5" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        <button class="btn mt-3 ms-5" data-bs-toggle="modal" style="border: 2px solid blue" data-bs-target="#exampleModal"><i
                                 class="fa fa-bell"></i>Notifications <sup class="bold text-danger h5"
                                 id="count"></sup></button>
 

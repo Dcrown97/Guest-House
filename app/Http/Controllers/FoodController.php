@@ -21,11 +21,11 @@ class FoodController extends Controller
 
     public function Food()
     {
-        $Foods = Food::all();
+        $foods = Food::paginate(10);
 
         // dd('food', $Foods);
 
-        return view('food', compact('Foods'));
+        return view('food', compact('foods'));
     }
 
     public function addFood(Request $request)
@@ -341,37 +341,43 @@ class FoodController extends Controller
     }
 
     //update food records
-    public function updateFood(Request $request)
+    public function editFood(Request $request)
     {
         // dd($request->all());
         $request->validate([
-            'food_id' => 'required',
             'food_name' => 'required',
-            'num_of_food' => 'required',
             'food_price' => 'required',
         ]);
-        $Food = Food::find($request->food_id);
-        $Food->food_name = $request->food_name;
-        $Food->num_of_food = $request->num_of_food;
-        $Food->food_price = $request->food_price;
-        $saved = $Food->save();
+        $food = Food::find($request->food_id);
+        if($food){
+            $food->food_name = $request->food_name;
+        $food->food_price = $request->food_price;
+        $saved = $food->save();
         if ($saved) {
             return redirect('/food')->with('success', 'Food Updated Successfully');
         } else {
             return redirect('/food')->with('error', 'Food Update Failed');
         }
+        }else{
+            return redirect('/food')->with('error', 'Something went wrong');
+        }
+        
     }
 
     //delete food records
-    public function deleteFood(Request $request)
+    public function deleteFood(Request $request, $id)
     {
         // dd($request->all());
-        $Food = Food::find($request->food_id);
-        $saved = $Food->delete();
+        $food = Food::find(base64_decode($id));
+       if($food){
+         $saved = $food->delete();
         if ($saved) {
             return redirect('/food')->with('success', 'Food Deleted Successfully');
         } else {
             return redirect('/food')->with('error', 'Food Delete Failed');
         }
+       }else{
+           return redirect('/food')->with('error', 'Something went wrong');
+       }
     }
 }
