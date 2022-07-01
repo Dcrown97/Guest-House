@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Drink extends Model
 {
@@ -13,4 +14,6 @@ class Drink extends Model
         'num_of_drink',
         'drink_price'
     ];
+
+    use SoftDeletes;
 }

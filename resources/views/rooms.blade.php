@@ -62,7 +62,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <table
+                                            <table
                                                     class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
                                                     id="example4">
                                                     <thead>
@@ -86,14 +86,14 @@
                                                                     <td>{{ $room->name }}
                                                                     </td>
                                                                     <td class="center">{{ $room->price }}</td>
-                                                                    <td>  <div class="justify-content-between"> <a class="btn btn-lg {{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" style="width:150px "> {{ ucfirst($room->status) }}  </a> </div> </td>
+                                                                    <td class="">  <div class="justify-content-between"> <a class="btn btn-lg {{ $room->status == 'booked'? 'bg-danger text-white': 'bg-success text-white' }}" style="width:150px "> {{ ucfirst($room->status) }}  </a> </div> </td>
                                                                     </td>
                                                                     <td>
                                                                         <div class="justify-content-between">
                                                                             <a href="/book/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-primary btn-lg">Book</a>
                                                                             <a href="/edit_room/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-warning btn-lg">Update</a>
+                                                                                class="btn btn-warning h2">  <i class="fa fa-edit p-2"></i> Update</a>
                                                                             <a onclick="return confirm('Are you sure you want to delete this room?')" href="/delete/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-danger btn-lg">Delete</a>
                                                                         </div>

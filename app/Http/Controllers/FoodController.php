@@ -145,9 +145,9 @@ class FoodController extends Controller
     public function Drinks()
     {
 
-        $Drinks = Drink::all();
+        $drinks = Drink::paginate(15);
 
-        return view('drinks', compact('Drinks'));
+        return view('drinks', compact('drinks'));
     }
 
     public function addDrinks(Request $request)
@@ -275,6 +275,103 @@ class FoodController extends Controller
         }
     }
 
+    //update drinks records
+    public function updateDrink(Request $request)
+    {
+        $drink = Drink::find($request->drink_id);
+        if($request->isMethod('post')){
+            // dd($request->all());
+            // dd($drink);
+        $request->validate([
+            'drink_name' => 'required',
+            'num_of_drink' => 'required',
+            'drink_price' => 'required',
+        ]);
+        $drink->drink_name = $request->drink_name;
+        $drink->num_of_drink = $request->num_of_drink;
+        $drink->drink_price = $request->drink_price;
+        $saved = $drink->save();
+        if ($saved) {
+            return redirect('/drinks')->with('success', 'Drink Updated Successfully');
+        } else {
+            return redirect('/drinks')->with('error', 'Drink Update Failed');
+        }
+        }
+        // return view('drinks', compact('drink'));
+    }
 
+    //update number of drinks and price in drink table
+    public function addMoreDrinks(Request $request)
+    {
+        $drink = Drink::find($request->drink_id);
+        if($request->isMethod('post')){
+            // dd($request->all());
+            // dd($drink);
+        $request->validate([
+            'num_of_drink' => 'required',
+            'drink_price' => 'required',
+        ]);
+        $drink->num_of_drink = $request->num_of_drink + $drink->num_of_drink;
+        $drink->drink_price = $request->drink_price;
+        $saved = $drink->save();
+        if ($saved) {
+            return redirect('/drinks')->with('success', 'More drinks added Successfully');
+        } else {
+            return redirect('/drinks')->with('error', 'Drink Update Failed');
+        }
+        }
+        // return view('drinks', compact('drink'));
+    }
 
+//delete drinks records
+    public function deleteDrink(Request $request, $id)
+    {
+        // dd($request->all());
+        $drink = Drink::find(base64_decode($id));
+        if($drink){
+            $saved = $drink->delete();
+        if ($saved) {
+            return redirect('/drinks')->with('success', 'Drink Deleted Successfully');
+        } else {
+            return redirect('/drinks')->with('error', 'Drink Delete Failed');
+        }
+        }else{
+            return redirect('/drinks')->with('error', 'Something went wrong');
+        }
+    }
+
+    //update food records
+    public function updateFood(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'food_id' => 'required',
+            'food_name' => 'required',
+            'num_of_food' => 'required',
+            'food_price' => 'required',
+        ]);
+        $Food = Food::find($request->food_id);
+        $Food->food_name = $request->food_name;
+        $Food->num_of_food = $request->num_of_food;
+        $Food->food_price = $request->food_price;
+        $saved = $Food->save();
+        if ($saved) {
+            return redirect('/food')->with('success', 'Food Updated Successfully');
+        } else {
+            return redirect('/food')->with('error', 'Food Update Failed');
+        }
+    }
+
+    //delete food records
+    public function deleteFood(Request $request)
+    {
+        // dd($request->all());
+        $Food = Food::find($request->food_id);
+        $saved = $Food->delete();
+        if ($saved) {
+            return redirect('/food')->with('success', 'Food Deleted Successfully');
+        } else {
+            return redirect('/food')->with('error', 'Food Delete Failed');
+        }
+    }
 }

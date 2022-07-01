@@ -24,7 +24,7 @@
                                 data-upgraded=",MaterialButton">
                                 <i class="material-icons">more_vert</i>
                             </button>
-                            
+
                         </div>
 
                         <div class="panel tab-border card-box">
@@ -40,7 +40,7 @@
                                             </i> Add Drinks
                                         </a>
                                     </li>
-                                    
+
                                 </ul>
                             </header>
                             <div class="panel-body">
@@ -95,13 +95,272 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <table
+                                            class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                                            id="example4">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/N</th>
+                                                    <th> Drinks </th>
+                                                    <th> Price </th>
+                                                    <th>Available</th>
+
+                                                    {{-- <th> Leave Days </th> --}}
+                                                    <th> Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="result"></tbody>
+                                            <tbody id="old">
+                                                @if (isset($drinks) && count($drinks) > 0)
+                                                    @foreach ($drinks as $drink)
+                                                        <tr class="odd gradeX">
+                                                            <td class="patient-img">
+                                                                {{ $loop->iteration }}
+                                                            </td>
+                                                            <td>{{ $drink->drink_name }}
+                                                            </td>
+                                                            <td class="center">{{ $drink->drink_price }}</td>
+                                                            <td>{{ $drink->num_of_drink }}</td>
+
+
+                                                            <td>
+                                                                <div class="justify-content-between">
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button" class="btn btn-primary btn-lg"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#add_modal{{ $drink->id }}">
+                                                                        <i class="fa fa-plus"></i>
+                                                                        Add More
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-primary btn-lg"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#update_modal{{ $drink->id }}">
+                                                                        <i class="fa fa-edit"></i>
+                                                                        Edit
+                                                                    </button>
+
+                                                                    <a onclick="return confirm('Are you sure you want to delete this drink?')"
+                                                                        href="/delete_drink/{{ base64_encode($drink->id) }}"
+                                                                        class="btn btn-danger btn-lg">Delete</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+
+
+
+
+
+                                                        <!--Edit Modal -->
+                                                        <div class="modal fade" id="update_modal{{ $drink->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                                            Drink </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="/update_drink" method="POST"
+                                                                            id="form_sample_1" class="form-horizontal">
+                                                                            @csrf
+                                                                            <div class="form-body">
+                                                                                <input type="hidden" name="drink_id"
+                                                                                    value="{{ $drink->id }}"
+                                                                                    id="">
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Drink
+                                                                                        Name
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="text"
+                                                                                            name="drink_name"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Drink Name"
+                                                                                            value="{{ $drink->drink_name }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Number
+                                                                                        Of Drink
+                                                                                        <span class="required"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="num_of_drink"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Drink Price"
+                                                                                            value="{{ $drink->num_of_drink }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Price
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="drink_price"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Drink Price"
+                                                                                            value="{{ $drink->drink_price }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Available
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="available"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Available"
+                                                                                            value="{{ $drink->num_of_drink }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Close</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Save
+                                                                                    changes</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- End of edit modal --}}
+
+                                                        {{-- Add more --}}
+                                                          <div class="modal fade" id="add_modal{{ $drink->id }}"
+                                                            tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Add More
+                                                                            Drink </h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form action="/add_more_drinks" method="POST"
+                                                                            id="form_sample_1" class="form-horizontal">
+                                                                            @csrf
+                                                                            <div class="form-body">
+                                                                                <input type="hidden" name="drink_id"
+                                                                                    value="{{ $drink->id }}"
+                                                                                    id="">
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Drink
+                                                                                        Name
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="text"
+                                                                                            name="drink_name"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Drink Name"
+                                                                                            readonly
+                                                                                            value="{{ $drink->drink_name }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Number
+                                                                                        Of Drink
+                                                                                        <span class="required"> *
+                                                                                        </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="num_of_drink"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter number of drink"
+                                                                                           
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Price
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="drink_price"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Drink Price"
+                                                                                            value="{{ $drink->drink_price }}"
+                                                                                            class="form-control input-height" />
+                                                                                            <small class="text-danger" > {{$drink->drink_name}} price will be update to this</small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                {{-- <div class="form-group row">
+                                                                                    <label
+                                                                                        class="control-label col-md-3">Available
+                                                                                        <span class="required"> * </span>
+                                                                                    </label>
+                                                                                    <div class="col-md-5">
+                                                                                        <input type="number"
+                                                                                            name="available"
+                                                                                            data-required="1"
+                                                                                            placeholder="Enter Available"
+                                                                                            value="{{ $drink->num_of_drink }}"
+                                                                                            class="form-control input-height" />
+                                                                                    </div>
+                                                                                </div> --}}
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Close</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary">Add More</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </tbody>
+                                        </table>
+
+                                        {{ $drinks->links('vendor.pagination.bootstrap-4') }}
+
                                     </div>
                                     <div class="tab-pane active" id="order_food">
                                         <div class="card-body" id="bar-parent">
                                             <b id="available" class="text-success h3"></b>
                                             @include('flash.flash')
-                                            <form action="{{ route('order_drinks') }}" method="POST" id="form_sample_1"
-                                                class="form-horizontal">
+                                            <form action="{{ route('order_drinks') }}" method="POST"
+                                                id="form_sample_1" class="form-horizontal">
                                                 @csrf
                                                 <div class="form-body">
                                                     <div class="form-group row">
@@ -112,8 +371,8 @@
                                                             <select class="form-select input-height" name="drink_id"
                                                                 id="drink_id">
                                                                 <option value="">Select...</option>
-                                                                @if (isset($Drinks) && count($Drinks) > 0)
-                                                                    @foreach ($Drinks as $drink)
+                                                                @if (isset($drinks) && count($drinks) > 0)
+                                                                    @foreach ($drinks as $drink)
                                                                         <option value="{{ $drink->id }}">
                                                                             {{ $drink->drink_name }}</option>
                                                                     @endforeach
@@ -140,7 +399,7 @@
                                                             <input type="number" name="ordered_drink_quantity"
                                                                 data-required="1" id="ordered_drink_quantity"
                                                                 placeholder="Enter Drink Quantity"
-                                                                class="form-control input-height" />
+                                                                class="form-control input-height" min="0" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -198,14 +457,16 @@
                     drink_id: drink_id
                 },
                 success: function(response) {
-                    // alert('yes', response.room)
+                    // alert('yes', response.drink)
                     console.log('response', response);
                     var response = JSON.parse(response);
                     console.log('responsuuue', response);
                     // $('#sub_category').empty();
                     $('#error1').text('');
                     $('#drink_price').val(response.price)
-                    $('#available').html(`<b class="text-success h3">Available: ${response.quantity}</b>`);
+                    $('#available').html(
+                        `<b class="text-success h3">Available: ${response.quantity}</b>`
+                    );
                     $('#ordered_drink_quantity').attr('max', response.quantity);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -215,7 +476,7 @@
             });
         });
 
-        $('#ordered_drink_quantity').keyup(function() {
+        $('#ordered_drink_quantity').on('change', function() {
             console.log("fsdfsdyu")
             let total_price = $(this).val() * $('#drink_price').val();
             $('#ordered_total_price').val(total_price);

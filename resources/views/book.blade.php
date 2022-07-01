@@ -112,7 +112,7 @@
                                         </label>
                                         <div class="col-md-5">
                                             <input type="text" id="days" name="days" readonly data-required="1"
-                                             class="form-control input-height" />
+                                             class="form-control input-height"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
