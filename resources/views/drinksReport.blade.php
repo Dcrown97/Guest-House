@@ -195,7 +195,7 @@
                                                     </thead>
                                                     <tbody id="result"></tbody>
                                                     <tbody id="old">
-                                                        @if (isset($drinksYesterday) && count($drinks) > 0)
+                                                        @if (isset($drinksYesterday) && count($drinksYesterday) > 0)
                                                             @foreach ($drinksYesterday as $drink)
                                                                 <tr class="odd gradeX">
                                                                     <td class="patient-img">
@@ -297,7 +297,7 @@
                                                     </thead>
                                                     <tbody id="result"></tbody>
                                                     <tbody id="old">
-                                                        @if (isset($drinksWeek) && count($drinks) > 0)
+                                                        @if (isset($drinksWeek) && count($drinksWeek) > 0)
                                                             @foreach ($drinksWeek as $drink)
                                                                 <tr class="odd gradeX">
                                                                     <td class="patient-img">
@@ -399,7 +399,7 @@
                                                     </thead>
                                                     <tbody id="result"></tbody>
                                                     <tbody id="old">
-                                                        @if (isset($drinksAll) && count($drinks) > 0)
+                                                        @if (isset($drinksAll) && count($drinksAll) > 0)
                                                             @foreach ($drinksAll as $drink)
                                                                 <tr class="odd gradeX">
                                                                     <td class="patient-img">
