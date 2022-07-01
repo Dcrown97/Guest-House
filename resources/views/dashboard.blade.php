@@ -45,7 +45,7 @@
             <div class="state-overview">
                 <div class="row">
                     <div class="col-xl-3 col-md-6 col-12">
-                        <div class="info-box bg-green">
+                        <div class="info-box bg-purple">
                             <span class="info-box-icon push-bottom"><i data-feather="users"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Total Rooms</span>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 col-12">
-                        <div class="info-box bg-b-yellow">
+                        <div class="info-box bg-b-pink">
                             <span class="info-box-icon push-bottom"><i data-feather="user"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Booked Rooms</span>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6 col-12">
-                        <div class="info-box bg-b-green">
+                        <div class="info-box bg-b-yellow">
                             <span class="info-box-icon push-bottom"><i data-feather=""></i></span>
                             <div class="info-box-content">
                                 {{-- <p style="font-size: 8px" >Booking and Restaurant</p> --}}
