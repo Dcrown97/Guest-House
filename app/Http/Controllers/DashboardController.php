@@ -17,6 +17,8 @@ class DashboardController extends Controller
     }
     public function index()
     {
+
+        // dd(date('H'));
         $total_rooms = Room::count();
         $available_rooms = Room::where('status', 'available')->count();
         $booked_rooms = Room::where('status', 'booked')->count();
@@ -63,7 +65,7 @@ class DashboardController extends Controller
     {
        $checkout_date = Booking::with('room')->whereDate('check_out', date('Y-m-d'))->get();
        //echo response only if time is less than 12 noon or equal to 12 noon
-         if (date('H') < 12) {
+         if (date('H') < 11) {
              echo json_encode($checkout_date);
             
          }else{

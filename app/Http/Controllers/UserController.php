@@ -78,7 +78,7 @@ class UserController extends Controller
                 if (Hash::check($data['password'], $user->password)) {
                     Auth::login($user);
                     $request->session()->put('user', $user);
-                    return redirect()->route('dashboard')->with('success', ucfirst($user->type) . ' ' . 'Logged In Successfully');
+                    return redirect()->route('dashboard')->with('success','Logged In Successfully');
                 } else {
                     return redirect()->back()->with('error', 'Invalid password');
                 }
