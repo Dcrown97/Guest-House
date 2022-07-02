@@ -23,6 +23,7 @@
                 </div>
             </div>
             <div class="page-bar">
+                @include('flash.flash')
                 <div class="page-title-breadcrumb">
                     <div class=" pull-left">
                         <div class="page-title">Dashboard</div>
