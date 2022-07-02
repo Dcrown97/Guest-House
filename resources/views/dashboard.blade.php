@@ -229,7 +229,7 @@
                 if(data.length > 0){
                   $.each(data, function(index, value) {
                     $('#notification').append(`
-                        <li class="text-danger"> ${index+1}. Mr/Mrs ${value.customer_name} in ${value.room.name} would check out by 12 noon today!<li>
+                        <li class="text-danger"> ${index+1}. Mr/Mrs ${value.customer_name} in ${value.room.name} would check out by 12 noon today! Remember to update ${value.room.name} status <hr><li>
                 `);
                  });
               
