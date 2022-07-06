@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Reservation;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BookingController extends Controller
@@ -21,7 +23,7 @@ class BookingController extends Controller
     public function book(Request $request , $id){
         $room = Room::find(base64_decode($id));
         if ($room->status == 'booked'){
-            return redirect()->route('rooms')->with('error', 'Room is already booked');
+            return redirect()->route('rooms')->with('error', "Room is already $room->status");
         }
 
        if($request->isMethod('post')){
@@ -29,7 +31,7 @@ class BookingController extends Controller
         //check if status is available
 
         // dd($request->all());
-             if($room->status == 'available')
+             if($room->status !== 'booked')
             {
                 $request->validate([
                     'check_in' => 'required',
@@ -43,6 +45,9 @@ class BookingController extends Controller
                     return back()->with('error', 'Check in date must be less than check out date');
                 }
 
+                //check if room is reserved between check in and check out date
+                $reservation = Reservation::where('room_id', $room->id)->get()->last();
+                // dd($reservation);
                 $booking = new Booking();
                 $booking->user_id = Auth::user()->id;
                 $booking->room_id = $room->id;
@@ -74,6 +79,121 @@ class BookingController extends Controller
        return view('book', ['room' => $room]);
     }
 
+// booking resevertion
+    public function booking_reservation(Request $request, $id){
+        // dd(base64_decode($id));
+        if($request->status == 'booked'){
+        $room = Booking::where('room_id',base64_decode($id))->with('room')->get()->last();
+        if($request->isMethod('post')){
+            
+            $request->validate([
+                'check_in' => 'required',
+                'check_out' => 'required',
+                'customer_name' => 'required',
+            ]);
+            // dd($room);
+            // check if room is booked and check if the check out date is less than the selected check in date
+            if($room->room->status == 'booked' && Carbon::parse($room->check_out) >
+            Carbon::parse($request->check_in)){
+                $max_date =  Carbon::parse($room->check_out)->format('Y-m-d');
+                Alert::error('Error', "Check in date for reservation must be greater than $max_date because the room is already booked");
+                return back()->with('error', "Check in date for reservation must be greater than $max_date because the room is already booked");
+            }else{
+                //check if check in date is less than check out date
+            if(Carbon::parse($request->check_in) >= Carbon::parse($request->check_out)){
+                Alert::error('Error', 'Check in date must be less than check out date');
+                return back()->with('error', 'Check in date must be less than check out date');
+            }
+
+            // dd($request->all());
+            $reserve = new Reservation();
+                $reserve->user_id = Auth::user()->id;
+                $reserve->room_id = $room->room->id;
+                $reserve->check_in = $request->check_in;
+                //check_out time must be 12noon of the selected check out date
+                $reserve->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
+                $reserve->room_price = $request->price;
+                $reserve->amount = $request->amount;
+                $reserve->days = $request->days;
+                $reserve->customer_name = $request->customer_name;
+                $reserve->customer_phone = $request->customer_phone;
+                $saved = $reserve->save();
+                if ($saved) {
+                    $room = Room::find(base64_decode($id))->update(['status' => 'reserved']);
+                    Alert::success('Success', 'Reservation successful');
+                    return redirect()->route('rooms');
+                } else {
+                    Alert::error('Error', 'Reservation failed');
+                    return back()->with('error', 'Reservation failed');
+                }
+
+            }
+        }
+        return view('reserve', ['room' => $room]);
+           
+        }else{
+            $room = Room::find(base64_decode($id));
+            // dd($room->status);
+            //if room status is reserved, put a warning message to session
+            if($room->status == 'reserved'){
+                $reserve = Reservation::where('room_id', $room->id)->get()->last();
+                // dd($reserve);
+                Alert::warning('Warning', "Room is already reserved between $reserve->check_in and $reserve->check_out");
+                Session::flash('warning', "Room is already reserved by $reserve->customer_name from $reserve->check_in to $reserve->check_out so please take note of this before choosing dates for this new reservation");
+            }
+
+             if($request->isMethod('post')){
+            
+            $request->validate([
+                'check_in' => 'required',
+                'check_out' => 'required',
+                'customer_name' => 'required',
+            ]);
+            // dd($room);
+            // check if room is booked and check if the check out date is less than the selected check in date
+            if($room->status == 'booked' && Carbon::parse($room->check_out)>
+            Carbon::parse($request->check_in)){
+                $max_date =  Carbon::parse($room->check_out)->format('Y-m-d');
+                Alert::error('Error', "Check in date for reservation must be greater than $max_date because the room is already booked");
+                return back()->with('error', "Check in date for reservation must be greater than $max_date because the room is already booked
+                because the room is already booked");
+            }else{
+                //check if check in date is less than check out date
+            if(Carbon::parse($request->check_in) >= Carbon::parse($request->check_out)){
+                Alert::error('Error', 'Check in date must be less than check out date');
+                return back()->with('error', 'Check in date must be less than check out date');
+            }
+
+
+            // dd($request->all());
+            $reserve = new Reservation();
+                $reserve->user_id = Auth::user()->id;
+                $reserve->room_id = $room->id;
+                $reserve->check_in = $request->check_in;
+                //check_out time must be 12noon of the selected check out date
+                $reserve->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
+                $reserve->room_price = $request->price;
+                $reserve->amount = $request->amount;
+                $reserve->days = $request->days;
+                $reserve->customer_name = $request->customer_name;
+                $reserve->customer_phone = $request->customer_phone;
+                $saved = $reserve->save();
+                if ($saved) {
+                    $room = Room::find(base64_decode($id))->update(['status' => 'reserved']);
+                    Alert::success('Success', 'Reservation successful');
+                    return redirect()->route('rooms');
+                } else {
+                    Alert::error('Error', 'Reservation failed');
+                    return back()->with('error', 'Reservation failed');
+                }
+
+            }
+        }
+        return view('reserve', ['room' => $room]);
+            
+        }
+       
+    }
 
     public function bookingsReport(){
         //rooms booked today

@@ -130,6 +130,14 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="/reservations">
+                                    <i data-feather="user-check"></i></i> Reservations </a>
+                            </li>
+                            <li>
+                                <a href="/others">
+                                    <i data-feather="folder-plus"></i></i> Others </a>
+                            </li>
+                            <li>
                                 <a href="/logout">
                                     <i class="icon-logout"></i> Log Out </a>
                             </li>

@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->string('customer_name')->after('amount');
-            $table->string('customer_phone')->after('customer_name')->nullable();
+        Schema::create('others', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('price')->nullable();
+            $table->longText('info')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('others');
     }
 };

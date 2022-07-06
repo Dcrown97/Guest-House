@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->string('customer_name')->after('amount');
-            $table->string('customer_phone')->after('customer_name')->nullable();
+        Schema::table('reservations', function (Blueprint $table) {
+            $table->string('customer_name');
+            $table->string('customer_phone')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        Schema::table('reservations', function (Blueprint $table) {
             //
         });
     }

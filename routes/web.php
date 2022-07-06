@@ -5,6 +5,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\LeavereportController;
+use App\Http\Controllers\OthersController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +37,7 @@ Route::match(['get', 'post'], '/add_rooms', [RoomsController::class, 'add_rooms'
 Route::match(['get', 'post'], '/rooms', [RoomsController::class, 'rooms_list'])->name('rooms');
 Route::match(['get', 'post'], '/edit_room/{id}', [RoomsController::class, 'edit_room'])->name('edit_room');
 Route::match(['get', 'post'], '/book/{id}', [BookingController::class, 'book'])->name('book');
+Route::match(['get', 'post'], '/reserve/{id}', [BookingController::class, 'booking_reservation'])->name('reserve');
 Route::match(['get', 'post'], '/delete/{id}', [RoomsController::class, 'delete_room'])->name('delete');
 Route::match(['get', 'post'], '/bookings_report', [BookingController::class, 'bookingsReport'])->name('bookings_report');
 Route::match(['get', 'post'], '/leave_request/{id}', [LeavereportController::class, 'LeaveRequest']);
@@ -66,5 +69,7 @@ Route::match(['get', 'post'], '/delete_drink/{id}', [FoodController::class, 'del
 Route::match(['get', 'post'], '/update_drink', [FoodController::class, 'updateDrink'])->name('update_drink');
 Route::post('/add_more_drinks', [FoodController::class, 'addMoreDrinks'])->name('add_more_drinks');
 Route::match(['get', 'post'], '/notifications', [DashboardController::class, 'getCheckoutDate']);
+Route::match(['get', 'post'], '/reservations', [ReservationController::class, 'index']);
+Route::match(['get', 'post'], '/others', [OthersController::class, 'index']);
 
 

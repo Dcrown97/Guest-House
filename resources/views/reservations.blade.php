@@ -5,7 +5,7 @@
             <div class="page-bar">
                 <div class="page-title-breadcrumb">
                     <div class=" pull-left">
-                        <div class="page-title">Rooms</div>
+                        <div class="page-title">Reservations</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
                         <li><i class="fa fa-home"></i>&nbsp;<a class="parent-item" href="/">Home</a>&nbsp;<i
@@ -13,19 +13,21 @@
                         </li>
                         {{-- <li><a class="parent-item" href="#">Other Staff</a>&nbsp;<i class="fa fa-angle-right"></i> --}}
                         </li>
-                        <li class="active">Rooms</li>
+                        <li class="active">Reservations</li>
                     </ol>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="tabbable-line">
-                        {{-- <ul class="nav customtab nav-tabs" role="tablist">
-                            <li class="nav-item"><a href="#tab1" class="nav-link active" data-bs-toggle="tab">List
-                                    View</a></li>
-                            <li class="nav-item"><a href="#tab2" class="nav-link" data-bs-toggle="tab">Grid
-                                    View</a></li>
-                        </ul> --}}
+                        <ul class="nav customtab nav-tabs" role="tablist">
+                            <li class="nav-item"><a href="#tab1" class="nav-link active" data-bs-toggle="tab">All Reservations</a>
+                            </li>
+                             <li class="nav-item"><a href="/rooms" class="nav-link active">Reserve a Room</a></li>
+                            {{-- <li class="nav-item"><a href="#tab2" class="nav-link" data-bs-toggle="tab">Yesterday</a></li>
+                            <li class="nav-item"><a href="#tab3" class="nav-link" data-bs-toggle="tab">This week</a></li>
+                            <li class="nav-item"><a href="#tab4" class="nav-link" data-bs-toggle="tab">All</a></li> --}}
+                        </ul>
                         <div class="tab-content">
                             <div class="tab-pane active fontawesome-demo" id="tab1">
                                 <div class="row">
@@ -40,18 +42,12 @@
                                                     <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
                                                 </div>
                                             </div>
-                                            <div class="card-body ">
-                                                 @include('flash.flash')    
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-6 col-6">
-                                                        <div class="btn-group">
-                                                            <a href="/add_rooms" id="addRow" class="btn btn-primary">
-                                                                Add More Rooms <i class="fa fa-plus"></i>
-                                                            </a>
-                                                        </div>
+                                            <div class="card-body">
+                                                
+                                                @include('flash.flash')
+                                                {{-- <div class="row">
 
-                                                    </div>
-                                                    <div class="col-md-6 col-sm-6 col-6">
+                                                    <div class="col-md-4 col-sm-4 col-4">
                                                         <div id="example4_filter" class="dataTables_filter">
                                                             <label>
                                                                 <input type="text" style="margin-bottom: 10px"
@@ -60,95 +56,72 @@
                                                                     id="search">
                                                             </label>
                                                         </div>
+
+
                                                     </div>
-                                                </div>
-                                            <table
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b> Total Bookings: {{ $bookings_count }} </b>
+
+
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-4">
+                                                        <b>Total Amount: N{{ number_format($bookings_amount) }}</b>
+
+
+                                                    </div>
+
+
+                                                </div> --}}
+                                                <table
                                                     class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
                                                     id="example4">
                                                     <thead>
                                                         <tr>
                                                             <th>S/N</th>
-                                                            <th> Name </th>
-                                                            <th> Price </th>
-                                                            <th> Status </th>
+                                                            <th> Room </th>
+                                                            <th> Customer Name </th>
+                                                            <th> Amount </th>
+                                                            <th> Check In</th>
+                                                            <th> Check Out </th>
+                                                            <th> Day(s)</th>
                                                             {{-- <th> Leave Days </th> --}}
-                                                            <th> Action </th>
+                                                            <th> Date </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="result"></tbody>
                                                     <tbody id="old">
-                                                        @if (isset($rooms) && count($rooms) > 0)
-                                                            @foreach ($rooms as $room)
+                                                        @if (isset($reservations) && count($reservations) > 0)
+                                                            @foreach ($reservations as $reservation)
                                                                 <tr class="odd gradeX">
                                                                     <td class="patient-img">
                                                                         {{ $loop->iteration }}
                                                                     </td>
-                                                                    <td>{{ $room->name }}
+                                                                    <td>{{ $reservation->room->name }}
                                                                     </td>
-                                                                    <td class="center">{{ $room->price }}</td>
-                                                                    <td class="">  <div class="justify-content-between"> <a class="btn btn-lg {{ $room->status !== 'available'? 'bg-danger text-white': 'bg-success text-white' }}" style="width:150px "> {{ ucfirst($room->status) }}  </a> </div> </td>
+                                                                    <td>{{ $reservation->customer_name }}</td>
+                                                                    <td class="center">{{ $reservation->amount }}</td>
+                                                                    <td>{{ date('d-m-Y', strtotime($reservation->check_in)) }}
+                                                                    </td>
+                                                                    <td>{{ date('d-m-Y', strtotime($reservation->check_out)) }}
+                                                                    </td>
+                                                                    <td>{{ date($reservation->days) }}</td>
                                                                     </td>
                                                                     <td>
-                                                                        <div class="justify-content-between">
-                                                                            <a href="/book/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-primary btn-lg">Book</a>
-                                                                                 <a href="reserve/{{ base64_encode($room->id) }}/?status={{$room->status}}"
-                                                                                class="btn btn-success h2">  <i class="fa fa-save p-2"></i> Reserve</a>
-                                                                            <a href="/edit_room/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-warning h2">  <i class="fa fa-edit p-2"></i> Update</a>
-                                                                            <a onclick="return confirm('Are you sure you want to delete this room?')" href="/delete/{{ base64_encode($room->id) }}"
-                                                                                class="btn btn-danger btn-lg">Delete</a>
-
-                                                                                
-                                                                        </div>
+                                                                        {{ $reservation->created_at->diffForHumans() }}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
-
-                                                            @endif
-                                                        </tbody>
-                                                    </table>
-                                                    {{ $rooms->links('vendor.pagination.bootstrap-4') }}
+                                                        @endif
+                                                    </tbody>
+                                                </table>
+                                                {{ $reservations->links('vendor.pagination.bootstrap-4') }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                         
 
-                            {{-- <div class="tab-pane" id="tab2">
-
-                                <div class="row">
-                                    @if (isset($rooms) && count($rooms) > 0)
-                                        @foreach ($rooms as $room)
-                                            <div class="col-md-4">
-                                                <div class="card">
-                                                    <div class="card-body no-padding ">
-                                                        <div class="doctor-profile">
-                                                            <div class="profile-usertitle">
-                                                                <div class="doctor-name">{{ $room->first_name }}
-                                                                    {{ $room->last_name }}
-                                                                </div>
-                                                                <div class="name-center"><b>Rank:</b>
-                                                                    {{ $room->rank }}
-                                                                </div>
-                                                            </div>
-                                                            <p><b>Unit:</b> {{ $room->unit }}</p>
-                                                            <p><b>Leave Days:</b>
-                                                                {{ 30 - intval($room->leave_days) == 0 ? 30 : 30 - intval($room->leave_days) }}
-                                                            </p>
-                                                            <div class="profile-userbuttons">
-                                                                <a href="/leave_request/{{ base64_encode($room->id) }}"
-                                                                    class="btn btn-circle deepPink-bgcolor btn-sm">Request
-                                                                    Leave</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -157,7 +130,7 @@
     </div>
 @endsection
 
-{{-- <script src="http://code.jquery.com/jquery-3.4.1.js"></script> --}}
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
     var searchRquest = [];
