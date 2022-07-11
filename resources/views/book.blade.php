@@ -105,6 +105,21 @@
                                                 placeholder="5000" class="form-control input-height" />
                                         </div>
                                     </div>
+
+                                   <div class="form-group row">
+                                        <label class="control-label col-md-3">Payment Method
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <select required class="form-select input-height" name="mode"
+                                                                >
+                                                                <option value="">Select...</option>
+                                                                <option value="cash">Cash</option>
+                                                                <option value="other">Transfer/POS/Online</option>
+                                                               
+                                                            </select>
+                                        </div>
+                                    </div>
                                     {{-- <input id="days" hidden  type="text"> --}}
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">No of Day(s)
@@ -166,9 +181,6 @@
             
         });
 
-    });
-
-
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
@@ -179,7 +191,14 @@
             if(mm<10){
                 mm='0'+mm
             } 
+            // fomart to datetime-local
+        
+        today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() ;
+        document.getElementById("datefield").setAttribute("min", today)
+        console.log('today',today);
 
-        today = yyyy+'-'+mm+'-'+dd ;
-        document.getElementById("datefield").setAttribute("max", today)
+    });
+
+
+        
 </script>

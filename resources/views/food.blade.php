@@ -247,6 +247,21 @@
                                                                 class="form-control input-height" />
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Payment Method
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <select required class="form-select input-height" name="mode"
+                                                                >
+                                                                <option value="">Select...</option>
+                                                                <option selected value="cash">Cash</option>
+                                                                <option value="other">Transfer/POS/Online</option>
+                                                               
+                                                            </select>
+                                        </div>
+                                    </div>
                                                     <div class="form-actions">
                                                         <div class="row">
                                                             <div class="offset-md-3 col-md-9">

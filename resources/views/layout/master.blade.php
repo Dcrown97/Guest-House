@@ -42,9 +42,36 @@
 <body
     class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-indigo">
     <div class="page-wrapper">
-        <!-- start header -->
-
-        <!-- end header -->
+       		<!-- start header -->
+		<div class="page-header navbar navbar-fixed-top">
+			<div class="page-header-inner ">
+				<!-- logo start -->
+				<div class="page-logo">
+					<a href="/">
+					Ophinab	<i data-feather="home"></i>
+				</div>
+				<!-- logo end -->
+				
+				
+				<!-- start mobile menu -->
+				<a class="menu-toggler responsive-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+				
+                    <i data-feather="menu"></i>
+				</a>
+				<!-- end mobile menu -->
+				<!-- start header menu -->
+            
+                <ul class="nav navbar-nav navbar-left in">
+					<li><a href="#" class="menu-toggler sidebar-toggler"><i data-feather="menu"></i></a></li>
+				</ul>
+				<div class="top-menu">
+					<ul class="nav navbar-nav pull-right">
+						<li><a class="fullscreen-btn"><i data-feather="maximize"></i></a></li>		
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- end header -->
         <!-- start color quick setting -->
 
         <!-- end color quick setting -->
@@ -91,7 +118,7 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/rooms" class="nav-link "> <span class="title">Book a Room</span>
+                                        <a href="/rooms" class="nav-link "> <span class="title">Book/Reserve</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -162,6 +189,7 @@
         </div>
         <!-- end footer -->
     </div>
+   
     <!-- start js include path -->
     <script src="../leave_report/assets/plugins/jquery/jquery.min.js"></script>
     <script src="../leave_report/assets/plugins/popper/popper.js"></script>

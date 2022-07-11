@@ -57,6 +57,7 @@ class UserController extends Controller
 
     public function Login(Request $request)
     {
+        // dd(bcrypt('11111111'));
 
         //redirect to dashboard if user is already logged in
         if (Auth::check()) {
@@ -72,7 +73,7 @@ class UserController extends Controller
                 $user = User::where('email', $data['email'])->first();
             } catch (\Exception $e) {
                 Alert::error('Server Error', 'Error');
-                return redirect()->back()->with('error', 'Server Error, Please make sure that Xampp is running');
+                return redirect()->back()->with('error','Server Error, Please make sure that Xampp is running');
             }
             if ($user) {
                 if (Hash::check($data['password'], $user->password)) {

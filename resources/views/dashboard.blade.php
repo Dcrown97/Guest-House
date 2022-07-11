@@ -99,15 +99,15 @@
                                 <span class="info-box-text">Total Sales<sup>(All TIme)</sup></span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 {{-- <span>All</span> --}}
-                                <span>N{{ number_format($total_sales) }}</span><sub>Booking, Food and Drinks</sub>
+                                <span>N{{ number_format($total_sales) }}</span>
                                 {{-- <span class="info-box-number">{{ $available_rooms > 0 ? $available_rooms : 0 }}</span> --}}
                                 <div class="progress">
                                     <div class="progress-bar" style="width: 100%"></div>
                                     
                                 </div>
-                                {{-- <span class="progress-description">
-                                    100% Increase in 28 Days
-                                </span> --}}
+                                <span class="progress-description" style="font-size: 8px">
+                                   Booking, Food, Drinks
+                                </span>
                             </div>
                         </div>
                     </div>

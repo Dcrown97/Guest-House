@@ -40,7 +40,7 @@ class BookingController extends Controller
                 ]);
 
                 //check if check in date is less than check out date
-                if(Carbon::parse($request->check_in)->format('Y-m-d') > Carbon::parse($request->check_out)->format('Y-m-d')){
+                if(Carbon::parse($request->check_in)->format('Y-m-d') >= Carbon::parse($request->check_out)->format('Y-m-d')){
                     Alert::error('Error', 'Check in date must be less than check out date');
                     return back()->with('error', 'Check in date must be less than check out date');
                 }
@@ -57,6 +57,7 @@ class BookingController extends Controller
                 $booking->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
                 $booking->room_price = $request->price;
                 $booking->amount = $request->amount;
+                $booking->payment_mode = $request->mode;
                 $booking->days = $request->days;
                 $booking->customer_name = $request->customer_name;
                 $booking->customer_phone = $request->customer_phone;
@@ -114,6 +115,7 @@ class BookingController extends Controller
                 $reserve->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
                 $reserve->room_price = $request->price;
                 $reserve->amount = $request->amount;
+                $reserve->payment_mode = $request->mode;
                 $reserve->days = $request->days;
                 $reserve->customer_name = $request->customer_name;
                 $reserve->customer_phone = $request->customer_phone;
@@ -174,6 +176,7 @@ class BookingController extends Controller
                 $reserve->check_out = Carbon::parse($request->check_out)->format('Y-m-d') . ' 12:00:00';
                 $reserve->room_price = $request->price;
                 $reserve->amount = $request->amount;
+                $reserve->payment_mode = $request->mode;
                 $reserve->days = $request->days;
                 $reserve->customer_name = $request->customer_name;
                 $reserve->customer_phone = $request->customer_phone;

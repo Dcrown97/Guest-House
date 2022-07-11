@@ -92,7 +92,7 @@
                                                                         <div class="justify-content-between">
                                                                             <a href="/book/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-primary btn-lg">Book</a>
-                                                                                 <a href="reserve/{{ base64_encode($room->id) }}/?status={{$room->status}}"
+                                                                                 <a href="reserve/{{ base64_encode($room->id) }}?status={{$room->status}}"
                                                                                 class="btn btn-success h2">  <i class="fa fa-save p-2"></i> Reserve</a>
                                                                             <a href="/edit_room/{{ base64_encode($room->id) }}"
                                                                                 class="btn btn-warning h2">  <i class="fa fa-edit p-2"></i> Update</a>

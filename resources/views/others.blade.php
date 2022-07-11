@@ -194,7 +194,7 @@
                                                             <span class="required">  </span>
                                                         </label>
                                                         <div class="col-md-5">
-                                                           <textarea name="info" id="" cols="71" placeholder="...all mation about this item" rows="5"></textarea>
+                                                           <textarea name="info" id="" cols="71" placeholder="...all information about this item" rows="5"></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="form-actions">

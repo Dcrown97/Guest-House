@@ -84,6 +84,7 @@ class FoodController extends Controller
 
                 $OrderedFoods->food_id = $request->food_id;
                 $OrderedFoods->ordered_food_price = $request->ordered_food_price;
+                $OrderedFoods->payment_mode = $request->mode;
                 $saved = $OrderedFoods->save();
                 if ($saved) {
                     return redirect('/food')->with('success', 'Food Ordered Successfully');
@@ -213,6 +214,7 @@ class FoodController extends Controller
 
             $OrderedDrinks->drink_id = $request->drink_id;
             $OrderedDrinks->ordered_drink_price = $request->ordered_drink_price;
+            $OrderedDrinks->payment_mode = $request->mode;
             $OrderedDrinks->ordered_drink_quantity = $request->ordered_drink_quantity;
             $OrderedDrinks->ordered_total_price = $request->ordered_total_price;
             $saved = $OrderedDrinks->save();
