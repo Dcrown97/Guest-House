@@ -34,8 +34,8 @@
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="./leave_report/assets/img/pages/signin.jpg" alt="sing up image"></figure>
-                        <a href="/signup" class="signup-image-link">Create an account</a>
+                        <figure><img src="./leave_report/assets/img/pages/signin.png" alt="sing up image"></figure>
+                        <a href="/signup" class="signup-image-link btn btn-outline-primary">Create an account</a>
                     </div>
                     <div class="signin-form">
                         <h2 class="form-title">Login</h2>

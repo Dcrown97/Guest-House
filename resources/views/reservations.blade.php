@@ -103,6 +103,14 @@
                                                                     <td>{{ date('d-m-Y', strtotime($reservation->check_in)) }}
                                                                     </td>
                                                                     <td>{{ date('d-m-Y', strtotime($reservation->check_out)) }}
+                                                                        {{-- Check if checkout date is today or passed --}}
+                                                                        @if (date('Y-m-d', strtotime($reservation->check_out)) == date('Y-m-d'))
+                                                                            <span class="badge badge-danger">Today</span>
+                                                                        @elseif (date('Y-m-d', strtotime($reservation->check_out)) < date('Y-m-d'))
+                                                                            <span class="badge badge-danger">Checked out</span>
+                                                                            @else
+                                                                            <span class="badge badge-success">In Room</span>
+                                                                        @endif
                                                                     </td>
                                                                     <td>{{ date($reservation->days) }}</td>
                                                                     </td>

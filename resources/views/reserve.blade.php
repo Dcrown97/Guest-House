@@ -111,6 +111,20 @@
                                                 placeholder="" class="form-control input-height" />
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Payment Method
+                                            <span class="required"> * </span>
+                                        </label>
+                                        <div class="col-md-5">
+                                            <select required class="form-select input-height" name="mode"
+                                                                >
+                                                                <option value="">Select...</option>
+                                                                <option value="cash">Cash</option>
+                                                                <option value="other">Transfer/POS/Online</option>
+                                                               
+                                                            </select>
+                                        </div>
+                                    </div>
                                     {{-- <input id="days" hidden  type="text"> --}}
                                     <div class="form-group row">
                                         <label class="control-label col-md-3">No of Day(s)
@@ -137,7 +151,7 @@
                                         <div class="row">
                                             <div class="offset-md-3 col-md-9">
                                                 <button type="submit"
-                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Book</button>
+                                                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-circle btn-primary">Reserve</button>
                                                 <a href="/rooms" class="btn btn-danger btn-circle"
                                                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-circle btn-danger">Cancel</a>
                                             </div>
