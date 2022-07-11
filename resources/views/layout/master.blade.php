@@ -42,36 +42,36 @@
 <body
     class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-indigo">
     <div class="page-wrapper">
-       		<!-- start header -->
-		<div class="page-header navbar navbar-fixed-top">
-			<div class="page-header-inner ">
-				<!-- logo start -->
-				<div class="page-logo">
-					<a href="/">
-					Ophinab	<i data-feather="home"></i>
-				</div>
-				<!-- logo end -->
-				
-				
-				<!-- start mobile menu -->
-				<a class="menu-toggler responsive-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
-				
+        <!-- start header -->
+        <div class="page-header navbar navbar-fixed-top">
+            <div class="page-header-inner ">
+                <!-- logo start -->
+                <div class="page-logo">
+                    <a href="/">
+                        Ophinab <i data-feather="home"></i>
+                </div>
+                <!-- logo end -->
+
+
+                <!-- start mobile menu -->
+                <a class="menu-toggler responsive-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+
                     <i data-feather="menu"></i>
-				</a>
-				<!-- end mobile menu -->
-				<!-- start header menu -->
-            
+                </a>
+                <!-- end mobile menu -->
+                <!-- start header menu -->
+
                 <ul class="nav navbar-nav navbar-left in">
-					<li><a href="#" class="menu-toggler sidebar-toggler"><i data-feather="menu"></i></a></li>
-				</ul>
-				<div class="top-menu">
-					<ul class="nav navbar-nav pull-right">
-						<li><a class="fullscreen-btn"><i data-feather="maximize"></i></a></li>		
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- end header -->
+                    <li><a href="#" class="menu-toggler sidebar-toggler"><i data-feather="menu"></i></a></li>
+                </ul>
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li><a class="fullscreen-btn"><i data-feather="maximize"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end header -->
         <!-- start color quick setting -->
 
         <!-- end color quick setting -->
@@ -114,7 +114,8 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item">
-                                        <a href="/add_rooms" class="nav-link "> <span class="title">Add Room </span></span>
+                                        <a href="/add_rooms" class="nav-link "> <span class="title">Add Room
+                                            </span></span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -122,7 +123,8 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/bookings_report" class="nav-link "> <span class="title">Bookings Report</span>
+                                        <a href="/bookings_report" class="nav-link "> <span class="title">Bookings
+                                                Report</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -133,40 +135,43 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="nav-item">
-                                        <a href="/food" class="nav-link "> <span
-                                                class="title">Food</span>
+                                        <a href="/food" class="nav-link "> <span class="title">Food</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/food_report" class="nav-link "> <span
-                                                class="title">Food Report</span>
+                                        <a href="/food_report" class="nav-link "> <span class="title">Food
+                                                Report</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="/drinks" class="nav-link "> <span
-                                                class="title">Drinks</span>
+                                        <a href="/drinks" class="nav-link "> <span class="title">Drinks</span>
                                         </a>
                                     </li>
-                                   
+
                                     <li class="nav-item">
 
-                                        <a href="/drinks_report" class="nav-link "> <span
-                                                class="title">Drinks Report</span>
+                                        <a href="/drinks_report" class="nav-link "> <span class="title">Drinks
+                                                Report</span>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="/reservations">
-                                    <i data-feather="user-check"></i></i> Reservations </a>
+                            <li class="nav-item nav-toggle">
+                                <a href="/reservations" class="nav-link">
+                                    <i data-feather="user-check"></i></i>
+                                    <span class="title">Reservations</span>
+                                </a>
                             </li>
+
                             <li>
                                 <a href="/others">
-                                    <i data-feather="folder-plus"></i></i> Others </a>
+                                    <i data-feather="folder-plus"></i></i>                                     <span class="title">Other</span>
+ </a>
                             </li>
                             <li>
                                 <a href="/logout">
-                                    <i class="icon-logout"></i> Log Out </a>
+                                    <i class="icon-logout"></i>                                     <span class="title">Log Out</span>
+</a>
                             </li>
                         </ul>
                     </div>
@@ -189,7 +194,7 @@
         </div>
         <!-- end footer -->
     </div>
-   
+
     <!-- start js include path -->
     <script src="../leave_report/assets/plugins/jquery/jquery.min.js"></script>
     <script src="../leave_report/assets/plugins/popper/popper.js"></script>
